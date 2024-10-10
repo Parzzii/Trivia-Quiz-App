@@ -1,103 +1,84 @@
-:root {
-  --header-height: 70px;
-  --background-color: #0d0d0d; /* Darker header background color */
-  --text-color: #ffffff; /* White text color for better contrast */
-  --button-background: #4d4d4d; /* Slightly brighter button background color */
-  --button-hover: #666666; /* Darker button hover color */
-  --button-focus: rgba(255, 255, 255, 0.7); /* Lighter focus outline */
-  --button-text-color: #ffffff; /* Button text color */
-  --button-radius: 8px; /* Subtle border radius for buttons */
-  --button-padding: 8px 16px; /* Adjusted button padding */
-  --font-size: 16px; /* Base font size */
-  --register-button-color: #28a745; /* Register button color */
-  --register-button-hover: #218838; /* Register button hover color */
-}
 
 body {
-  margin-top: var(--header-height); /* Ensure content does not overlap with the header */
+  margin-top: 70px;
   font-family: "Arial", sans-serif;
-  color: var(--text-color); /* Brighter text color */
-  background-color: #202020; /* Darker body background */
+  color: white;
+  background-color: #202020;
 }
 
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; 
   align-items: center;
   padding: 0 20px;
-  height: var(--header-height);
-  background-color: var(--background-color); /* Darker header background */
-  color: var(--text-color); /* White text color */
+  height: 70px;
+  background-color: #0B0B0B !important;
+  color: white;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .icon {
   width: 40px;
   height: 40px;
-  background-color: transparent; /* Keep icon background transparent */
+  background-color: transparent;
 }
 
 .know-it-all {
-  font-size: 30px; /* Increase title font size */
+  font-size: 28px;
   font-weight: bold;
-  color: var(--text-color); /* Keep text color white */
+  color: #ffffff;
   cursor: pointer;
   text-align: center;
-  flex-grow: 1; /* Ensure title is centered and takes available space */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 0 auto; 
+  position: absolute; 
+  left: 50%; 
+  transform: translateX(-50%); 
+  font-family: "Comic Neue", Arial, sans-serif;
 }
 
 .header-buttons {
   display: flex;
-  gap: 15px; /* Increase space between buttons */
+  gap: 15px;
 }
 
+
+/*button*/
 .random-button,
 .friends-button,
 .login-button,
 .register-button {
-  background-color: var(--button-background); /* Slightly brighter button background */
-  color: var(--button-text-color); /* White button text color */
-  border-radius: var(--button-radius); /* Keep button radius subtle */
-  padding: var(--button-padding); /* Adjust button padding */
-  font-size: var(--font-size); /* Button text size */
+  color: white;
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 20px;
+background: var(--Green, #40CE74);
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover and focus transition */
-  border: none; /* No border */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border: none;
+  width: 100px;
+  height: 50px;
+flex-shrink: 0;
+  font-family: "Comic Neue", Arial, sans-serif;
 }
 
+/*hover*/
 .random-button:hover,
 .friends-button:hover,
 .login-button:hover,
 .register-button:hover {
-  background-color: var(--button-hover); /* Darker hover state */
-  transform: scale(1.05); /* Slight scale effect on hover */
+  background-color: blue;
+  transform: scale(1.05);
 }
 
 .random-button:focus,
 .friends-button:focus,
 .login-button:focus,
 .register-button:focus {
-  outline: none; /* Remove outline */
-  box-shadow: 0 0 0 3px var(--button-focus); /* Focus outline */
-}
-
-.register-button {
-  background-color: var(--register-button-color); /* Brighter register button */
-}
-
-.register-button:hover {
-  background-color: var(--register-button-hover); /* Hover color for register button */
-}
-
-.register-button:focus {
   outline: none;
-  box-shadow: 0 0 0 3px var(--button-focus);
+  box-shadow: 0 0 0 3px  rgba(255, 255, 255, 0.7);
 }
