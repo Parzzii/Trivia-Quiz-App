@@ -29,10 +29,10 @@ const Header = () => {
           {t("register")} {/* Translation key for "Register" */}
         </button>
         <button className="random-button" onClick={() => navigate("/random")}>
-          {t("random")} {/* Translation key for "Register" */}
+          {t("Random")} {/* Translation key for "Register" */}
         </button>
         <button className="friends-button" onClick={() => navigate("/friends")}>
-          {t("friends")} {/* Translation key for "Register" */}
+          {t("Friends")} {/* Translation key for "Register" */}
         </button>
       </div>
     </header>
