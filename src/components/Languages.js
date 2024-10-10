@@ -6,7 +6,8 @@ import Header from "./Header";
 import Footer from "./Footer";
 
 const Languages = () => {
-  const { i18n } = useTranslation();  
+  const { i18n } = useTranslation(); 
+  const { t } = useTranslation(); 
   const navigate = useNavigate();
 
   // Change the language based on the button clicked
@@ -22,15 +23,15 @@ const Languages = () => {
     <div className="languages-page">
       <Header />
       <div className="languages-content">
-        <h1 className="languages-title">Available Languages</h1>
-        <p className="languages-text">We currently support the following languages:</p>
+        <h1 className="languages-title"> {t("available")}</h1>
+        <p className="languages-text"> {t("currently_support")}</p>
         <ul className="languages-list">
           <li>
             {/* Button to switch the site language to English */}
             <button 
               className={`language-button ${i18n.language === "en" ? "active-language" : ""}`} 
               onClick={() => handleLanguageChange("en")}>
-                English
+                {t("english")}
             </button>
           </li>
           <li>
@@ -38,13 +39,13 @@ const Languages = () => {
             <button 
               className={`language-button ${i18n.language === "ru" ? "active-language" : ""}`} 
               onClick={() => handleLanguageChange("ru")}>
-                Russian
+                {t("russian")}
             </button>
           </li>
         </ul>
 
         <button className="back-button" onClick={handleBackClick}>
-          &larr; Back
+          &larr; {t("back")}
         </button>
       </div>
       <Footer />

@@ -1,11 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";  
 import "./Login.css";
 import Header from "./Header";
 import Footer from "./Footer";
 
 function Login() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleBackClick = (e) => {
     e.preventDefault(); // Prevent form submission
@@ -16,24 +18,24 @@ function Login() {
     <div className="login-container">
       <Header />
       <main className="login-form">
-        <h1>Login</h1>
+        <h1>{t("login")}</h1>
         <form>
           <div className="form-group">
-            <label htmlFor="username">Username:</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username" required />
+            <label htmlFor="username">{t("username")}:</label>
+            <input type="text" id="username" name="username" placeholder={t("enter_username_placeholder")} required />
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required />
+            <label htmlFor="password">{t("password")}:</label>
+            <input type="password" id="password" name="password" placeholder={t("enter_password_placeholder")} required />
           </div>
 
           <div className="button-group">
             <button type="submit" className="submit-button">
-              Login
+              {t("login")}
             </button>
             <button className="back-button" onClick={handleBackClick}>
-              Back
+              {t("back")}
             </button>
           </div>
         </form>
