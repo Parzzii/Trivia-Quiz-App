@@ -19,7 +19,7 @@ i18n
             know_it_all: "Know It All",
             login : "Login",
             register: "Register",
-            test: "test"
+            test: "test!!!!"
           }
         },
         ru: {
