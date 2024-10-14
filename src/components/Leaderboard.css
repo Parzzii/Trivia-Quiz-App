@@ -3,10 +3,13 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100vh;
+    background: #d6f6ff; 
+
   }
   
   .leaderboard {
-    background-color: #e0f7fa;
+    /* background-color: #e0f7fa; */
+    background-color: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -29,25 +32,29 @@
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    color: black;
   }
   
   th {
     background-color: #f1f1f1;
+    color: black;
   }
   
   td:nth-child(3) {
     font-weight: bold;
   }
   
-  td:nth-child(3):nth-of-type(1) {
+  tr:nth-child(1) td:nth-child(3) {
     color: #4CAF50; /* 1st - Green */
   }
   
-  td:nth-child(3):nth-of-type(2) {
+  
+  tr:nth-child(2) td:nth-child(3) {
     color: #FFC107; /* 2nd - Yellow */
   }
   
-  td:nth-child(3):nth-of-type(3) {
+  
+  tr:nth-child(3) td:nth-child(3) {
     color: #FF5722; /* 3rd - Orange */
   }
   

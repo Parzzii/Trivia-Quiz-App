@@ -3,7 +3,11 @@
   flex-direction: column;
   min-height: 100vh;
   /* background: #33ccd0; */
-  background: #f4f4f4;
+  /* background: #f4f4f4; */
+  background: #d6f6ff; 
+
+  /* background-color: lightblue; */
+  color: #333;
 
 
 }
@@ -34,6 +38,8 @@
   cursor: pointer;
   text-decoration: none;
   transition: color 0.3s ease;
+  font-family: "Comic Neue", Arial, sans-serif;
+
   /* text-align: center; */
  
  
