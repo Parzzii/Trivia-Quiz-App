@@ -1,6 +1,6 @@
 html,
 body {
-  background-color: #ffffff !important; /* Force white background */
+  background-color: #f0f4f8; /* Light blueish background */
   margin: 0;
   padding: 0;
   height: 100%; /* Ensure the entire viewport is filled */
@@ -13,7 +13,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #ffffff; /* Also ensure this container has a white background */
+  background-color: #f0f4f8; /* Light blueish background */
   padding: 20px;
   font-family: Arial, sans-serif;
 }
@@ -21,7 +21,7 @@ body {
 /* Question container for question and answers */
 .question-container {
   background-color: #ffffff;
-  border: 2px solid #000;
+  border: 2px solid #007bff;
   border-radius: 10px;
   max-width: 650px;
   width: 100%;
@@ -38,7 +38,7 @@ body {
 /* Question number styling */
 .question-number {
   font-size: 18px;
-  color: #666;
+  color: #007bff; /* Blue color for contrast */
   font-weight: bold;
   margin-bottom: 15px;
   text-align: center;
@@ -49,6 +49,21 @@ body {
   font-size: 26px;
   font-weight: bold;
   margin-bottom: 20px;
+  color: #333; /* Darker color for better contrast */
+}
+
+/* Answer option styling */
+.answer-option {
+  background-color: #e3f2fd; /* Light blue option background */
+  border-radius: 5px;
+  padding: 15px;
+  margin: 15px 0;
+  font-size: 18px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  color: #000000; /* Darker text color */
+  font-weight: bold; /* Bold text for emphasis */
 }
 
 /* Answer list styling */
@@ -59,21 +74,9 @@ body {
   margin: 0;
 }
 
-/* Answer option styling */
-.answer-option {
-  background-color: #e7e7e7;
-  border-radius: 5px;
-  padding: 15px;
-  margin: 15px 0;
-  font-size: 18px;
-  cursor: pointer;
-  text-align: center;
-  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
 /* Hover effect with blue color */
 .answer-option:hover {
-  background-color: #007bff;
+  background-color: #007bff; /* Blue on hover */
   transform: scale(1.05);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   color: white;
@@ -93,25 +96,25 @@ body {
 /* Progress bar container */
 .progress-bar-wrapper {
   width: 100%;
-  background-color: #f0f0f0;
+  background-color: #dcedc8; /* Light green background for progress */
   height: 25px;
   border-radius: 10px;
   margin-top: 20px;
   overflow: hidden;
-  border: 2px solid #000;
+  border: 2px solid #007bff;
 }
 
 /* Progress bar styling */
 .progress-bar {
   height: 100%;
-  background-color: #ff4500;
+  background-color: #ff5722; /* Orange progress bar */
   border-radius: 10px;
   transition: width 0.0625s linear;
 }
 
 /* Button for next question */
 .next-question-btn {
-  background-color: #4caf50;
+  background-color: #4caf50; /* Green for next question button */
   color: white;
   border: none;
   padding: 15px 30px;
@@ -144,7 +147,7 @@ body {
 
 /* Button hover effect */
 .next-question-btn:hover {
-  background-color: #45a049;
+  background-color: #388e3c;
 }
 
 /* End of quiz section styling */
@@ -169,7 +172,7 @@ body {
 .end-options button {
   width: 100%;
   padding: 12px 20px;
-  background-color: #007bff;
+  background-color: #007bff; /* Blue for final buttons */
   color: white;
   border: none;
   border-radius: 8px;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Confetti from "react-confetti"; // Import Confetti
 import "./QuestionPage.css"; // Use the same CSS file as Random.js
 import Header from "./Header";
 import Footer from "./Footer";
@@ -20,6 +21,7 @@ const QuestionPage = () => {
   const [timerActive, setTimerActive] = useState(false);
   const [quizEnded, setQuizEnded] = useState(false);
   const [score, setScore] = useState(0);
+  const [allCorrect, setAllCorrect] = useState(false); // Track if all answers are correct
 
   const fetchQuestions = async () => {
     if (!topicId || !difficulty) {
@@ -90,6 +92,12 @@ const QuestionPage = () => {
       resetQuestionState();
     } else {
       setQuizEnded(true);
+
+      // Check if all answers were correct (i.e., max score based on difficulty)
+      const maxScore = difficulty === "hard" ? 200 : difficulty === "medium" ? 140 : 100;
+      if (score === maxScore) {
+        setAllCorrect(true); // All answers were correct
+      }
     }
   };
 
@@ -117,13 +125,18 @@ const QuestionPage = () => {
   return (
     <div className="question-page-container">
       <Header />
+
+      {/* Confetti celebration if all answers are correct */}
+      {allCorrect && <Confetti />}
+
       <div className="question-container">
         {loading ? (
           <p>Loading questions...</p>
         ) : quizEnded ? (
           <div className="score-section">
             <h2>Your Final Score</h2>
-            <p>{score}</p> {/* Display the final score */}
+            <p>{score}</p>
+            {allCorrect && <h3>Congratulations! You got all answers right!</h3>}
             <div className="end-options">
               <ul>
                 <li>
