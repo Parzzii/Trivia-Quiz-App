@@ -5,22 +5,22 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f0f8ff;
+  background-color: #ffffff; /* Ensuring background is white */
   padding: 20px;
   font-family: Arial, sans-serif;
 }
 
 /* Random container for question and answers */
 .random-container {
-  background-color: #ffffff;
-  border: 2px solid #000;
+  background-color: #f7fbff; /* Light blue background for the container */
+  border: 2px solid #37474f; /* Darker gray border for better contrast */
   border-radius: 10px;
-  max-width: 650px; /* Increase width to match QuestionPage */
+  max-width: 650px;
   width: 100%;
-  padding: 30px; /* Same padding as in QuestionPage */
+  padding: 30px;
   margin: 20px auto;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Same box-shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,9 +29,10 @@
 
 /* Random question styling */
 .random-container h2 {
-  font-size: 26px; /* Match font size from QuestionPage */
+  font-size: 26px;
   font-weight: bold;
   margin-bottom: 20px;
+  color: #333333; /* Dark text for contrast */
 }
 
 /* Styling for question display */
@@ -41,6 +42,7 @@
   line-height: 1.5;
   text-align: center;
   word-wrap: break-word;
+  color: #37474f; /* Darker gray for text */
 }
 
 /* Answer list styling */
@@ -53,22 +55,24 @@
 
 /* Answer option styling */
 .random-answer-option {
-  background-color: #e7e7e7;
+  background-color: #e7e7e7; /* Light gray background for answers */
   border-radius: 5px;
   padding: 15px;
   margin: 15px 0;
   font-size: 18px;
   cursor: pointer;
   text-align: center;
-  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Add transitions for hover effects */
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  color: #333333; /* Dark text for readability */
+  font-weight: bold;
 }
 
-/* Hover effect with blue color */
+/* Hover effect with new color scheme */
 .random-answer-option:hover {
-  background-color: #007bff; /* Blue color on hover */
-  transform: scale(1.05); /* Slightly enlarges the option on hover */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Adds a shadow effect */
-  color: white; /* Change text color to white on hover */
+  background-color: #0066cc; /* Stronger blue for hover effect */
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Deeper shadow effect */
+  color: white;
 }
 
 /* Styling for selected and correct answers */
@@ -86,24 +90,24 @@
 .random-progress-bar-wrapper {
   width: 100%;
   background-color: #f0f0f0;
-  height: 25px; /* Same height as in QuestionPage */
+  height: 25px;
   border-radius: 10px;
   margin-top: 20px;
   overflow: hidden;
-  border: 2px solid #000;
+  border: 2px solid #37474f;
 }
 
 /* Progress bar styling */
 .random-progress-bar {
   height: 100%;
-  background-color: #ff4500; /* Orange red */
+  background-color: #ff5722; /* Orange for progress */
   border-radius: 10px;
   transition: width 0.0625s linear;
 }
 
 /* Button for next question */
 .random-next-question-btn {
-  background-color: #4caf50;
+  background-color: #4caf50; /* Green background for next button */
   color: white;
   border: none;
   padding: 15px 30px;
@@ -136,8 +140,9 @@
 
 /* Button hover effect */
 .random-next-question-btn:hover {
-  background-color: #45a049;
+  background-color: #388e3c;
 }
+
 /* Progress bar container */
 .random-progress-bar-wrapper {
   width: 100%;

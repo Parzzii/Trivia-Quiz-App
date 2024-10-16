@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";  
 import "./ChooseTopic.css"; // Ensure your CSS file path is correct
 import Header from "./Header";
 import Footer from "./Footer";
 
 function ChooseTopic() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [categories, setCategories] = useState([]);
   const [filteredCategories, setFilteredCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -60,25 +62,25 @@ function ChooseTopic() {
     <div className="choose-topic-container">
       <Header />
       <main className="choose-topic-main">
-        <h1>Choose a Topic</h1>
+        <h1>{t("choose_a_topic")}</h1>
 
         {/* Difficulty Selector */}
         <div className="difficulty">
-          <label htmlFor="difficulty-select">Select Difficulty:</label>
+          <label htmlFor="difficulty-select">{t("select_difficulty")}:</label>
           <select id="difficulty-select" value={difficulty} onChange={handleDifficultyChange}>
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
+            <option value="easy">{t("easy")}</option>
+            <option value="medium">{t("medium")}</option>
+            <option value="hard"> {t("hard")}</option>
           </select>
         </div>
 
         {/* Search Input */}
         <div className="search-bar">
-          <input type="text" placeholder="Search topics..." value={searchTerm} onChange={handleSearchChange} />
+          <input type="text" placeholder= {t("search_topics")} value={searchTerm} onChange={handleSearchChange} />
         </div>
 
         {/* Topic Grid */}
-        {loading && <p>Loading categories...</p>}
+        {loading && <p>{t("loading_categories")}...</p>}
         {error && <p>{error}</p>}
         {!loading && !error && filteredCategories.length > 0 ? (
           <div className="topic-grid">
@@ -89,7 +91,7 @@ function ChooseTopic() {
             ))}
           </div>
         ) : (
-          <p>No categories available.</p>
+          <p>{t("no_categories")}</p>
         )}
       </main>
       <Footer />
