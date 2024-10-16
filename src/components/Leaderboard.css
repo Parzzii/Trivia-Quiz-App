@@ -1,71 +1,126 @@
+/* Main container for leaderboard page */
 .leaderboard-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
-    background: #d6f6ff; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+  font-family: "Poppins", sans-serif;
+}
 
+/* Leaderboard card styling */
+.leaderboard-card {
+  background: white;
+  width: 80%;
+  max-width: 1000px;
+  margin: 30px auto;
+  border-radius: 16px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+}
+
+/* Title for leaderboard */
+.leaderboard-title {
+  font-size: 2.5rem;
+  color: #333;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Table container for responsive scrolling */
+.leaderboard-table {
+  max-height: 55vh; /* Set max height for table scrolling */
+  overflow-y: auto;
+}
+
+/* Styling for the table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+}
+
+/* Table header */
+th {
+  background-color: #f4f4f4;
+  color: #555;
+  font-weight: 700;
+  padding: 15px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #ddd;
+}
+
+/* Table data cells */
+td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+/* Alternating row color */
+tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+/* Hover effect for rows */
+tbody tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.3s ease;
+}
+
+/* Rank column with larger icons */
+td:first-child {
+  font-size: 1.8rem;
+}
+
+/* Top 3 ranks styling */
+tbody tr:nth-child(1) td {
+  background-color: #ffeb3b; /* Gold */
+  color: black;
+}
+
+tbody tr:nth-child(2) td {
+  background-color: #c0c0c0; /* Silver */
+  color: black;
+}
+
+tbody tr:nth-child(3) td {
+  background-color: #cd7f32; /* Bronze */
+  color: black;
+}
+
+/* Footer and header styles, making sure they stick to the top/bottom */
+footer,
+header {
+  text-align: center;
+  background-color: #333;
+  color: white;
+  padding: 15px 0;
+}
+
+/* Make the design responsive */
+@media (max-width: 768px) {
+  .leaderboard-card {
+    width: 90%;
   }
-  
-  .leaderboard {
-    /* background-color: #e0f7fa; */
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 0 auto;
-    width: 50%;
-    text-align: center;
+
+  .leaderboard-title {
+    font-size: 2rem;
   }
-  
-  .leaderboard h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
+
+  th,
+  td {
+    padding: 10px;
+    font-size: 1rem;
   }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
+
+  td:first-child {
+    font-size: 1.5rem;
   }
-  
-  th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    color: black;
-  }
-  
-  th {
-    background-color: #f1f1f1;
-    color: black;
-  }
-  
-  td:nth-child(3) {
-    font-weight: bold;
-  }
-  
-  tr:nth-child(1) td:nth-child(3) {
-    color: #4CAF50; /* 1st - Green */
-  }
-  
-  
-  tr:nth-child(2) td:nth-child(3) {
-    color: #FFC107; /* 2nd - Yellow */
-  }
-  
-  
-  tr:nth-child(3) td:nth-child(3) {
-    color: #FF5722; /* 3rd - Orange */
-  }
-  
-  @media (max-width: 768px) {
-    .leaderboard {
-      width: 90%;
-    }
-  
-    th, td {
-      font-size: 14px;
-      padding: 8px;
-    }
-  }
-  
+}
