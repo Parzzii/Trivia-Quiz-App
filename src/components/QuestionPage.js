@@ -7,7 +7,7 @@ import Footer from "./Footer";
 
 const QuestionPage = () => {
   const { state } = useLocation();
-  const { topicId, difficulty } = state || {};
+  const { topicId, difficulty, playerName } = state || {}; // Ensure playerName is included
   const navigate = useNavigate();
 
   const [questions, setQuestions] = useState([]);
@@ -91,6 +91,7 @@ const QuestionPage = () => {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       resetQuestionState();
     } else {
+      handleEndQuiz(); // Call handleEndQuiz when the quiz ends
       setQuizEnded(true);
 
       // Check if all answers were correct (i.e., max score based on difficulty)
@@ -108,6 +109,15 @@ const QuestionPage = () => {
     setShowNextQuestion(false);
     setProgress(100);
     setTimerActive(false);
+  };
+
+  const handleEndQuiz = async () => {
+    // Send score to the leaderboard API
+    await fetch("/api/leaderboard", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: playerName, score, gameMode: difficulty }), // Assuming difficulty is used as the game mode
+    });
   };
 
   const handleReplay = () => {
@@ -167,7 +177,7 @@ const QuestionPage = () => {
                     <li
                       key={index}
                       className={`answer-option 
-                        ${selectedAnswer === answer ? (isCorrect ? "correct" : "selected") : ""}
+                        ${selectedAnswer === answer ? (isCorrect ? "correct" : "selected") : ""} 
                         ${showCorrectAnswer && answer === questions[currentQuestionIndex].correctAnswer ? "correct" : ""}
                       `}
                       onClick={() => handleAnswerClick(answer)}

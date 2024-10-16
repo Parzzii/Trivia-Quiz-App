@@ -1,44 +1,62 @@
-import React, { useState } from 'react';
-import './Leaderboard.css'; // Create this CSS file for styling
-import Header from './Header'; // Header component
-import Footer from './Footer'; // Footer component
+import React, { useEffect, useState } from "react";
+import Header from "./Header";
+import Footer from "./Footer";
+import "./Leaderboard.css";
 
 const Leaderboard = () => {
-  // Sample data (you can replace this with a database connection later)
-  const [players] = useState([
-    { name: 'Sofia J.', score: 304, ranking: '1st' },
-    { name: 'Eva M.', score: 275, ranking: '2nd' },
-    { name: 'Sally R.', score: 200, ranking: '3rd' },
-    { name: 'John D.', score: 154, ranking: '4th' },
-  ]);
+  const [scores, setScores] = useState([]);
+
+  useEffect(() => {
+    const fetchScores = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/leaderboard");
+        if (!response.ok) throw new Error("Network response was not ok");
+        const data = await response.json();
+        setScores(data);
+      } catch (error) {
+        console.error("Error fetching scores:", error);
+      }
+    };
+
+    fetchScores();
+  }, []);
+
+  const getMedal = (index) => {
+    if (index === 0) return "🥇"; // Gold medal
+    if (index === 1) return "🥈"; // Silver medal
+    if (index === 2) return "🥉"; // Bronze medal
+    return "👤"; // Default player icon for others
+  };
 
   return (
     <div className="leaderboard-container">
-      <Header /> {/* Assuming you have a Header component */}
-      
-      <div className="leaderboard">
-        <h2>Leaderboard</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Score</th>
-              <th>Overall Ranking</th>
-            </tr>
-          </thead>
-          <tbody>
-            {players.map((player, index) => (
-              <tr key={index}>
-                <td>{player.name}</td>
-                <td>{player.score}</td>
-                <td>{player.ranking}</td>
+      <Header />
+      <div className="leaderboard-card">
+        <h1 className="leaderboard-title">🏆 Leaderboard 🏆</h1>
+        <div className="leaderboard-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Score</th>
+                <th>Game Mode</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {scores.map((score, index) => (
+                <tr key={score._id}>
+                  <td>{getMedal(index)}</td>
+                  <td>{score.name}</td>
+                  <td>{score.score}</td>
+                  <td>{score.gameMode}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-      
-      <Footer /> {/* Assuming you have a Footer component */}
+      <Footer />
     </div>
   );
 };
