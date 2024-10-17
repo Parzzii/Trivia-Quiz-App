@@ -8,24 +8,25 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centering content horizontally */
-  justify-content: center; /* Centering content vertically */
+  align-items: center; 
+  justify-content: center; 
   padding: 40px 20px;
   text-align: center;
-  background-color: #f9f9f9; /* Light background for content section */
+  background: #d6f6ff; 
+  font-family: "Comic Neue", Arial, sans-serif;
 }
 
 .back-button {
   background-color: #0773e6;
   color: white;
-  padding: 15px 30px; /* Larger padding for a rectangular shape */
+  padding: 15px 30px; 
   border: none;
   cursor: pointer;
   border-radius: 5px;
-  margin-top: 20px; /* Added margin on top for spacing */
-  font-size: 18px; /* Increased font size */
+  margin-top: 20px; 
+  font-size: 18px; 
   transition: background-color 0.3s ease;
-  width: 200px; /* Fixed width for consistency */
+  width: 200px; 
 }
 
 .back-button:hover {
@@ -35,11 +36,13 @@
 .language-button {
   font-size: 30px;
   color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   margin-top: 10px;
   font-weight: 500;
   border-radius: 10%;
   cursor: pointer;
+  font-family: "Comic Neue", Arial, sans-serif;
+  border: none;
 }
 
 .language-button:hover {
@@ -47,7 +50,7 @@
 }
 
 .language-button.active-language {
-  background-color: rgb(118, 73, 135);  /* Bright color for active language */
+  background-color: #EA5058;
   color: white;
 }
 
@@ -57,7 +60,7 @@
   margin: 0;
 }
 
-/* Ensure footer stays at the bottom */
+
 .footer-page {
   display: flex;
   flex-direction: column;
