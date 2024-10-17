@@ -6,8 +6,10 @@ const Leaderboard = require("../models/LeaderboardModel");
 router.get("/", async (req, res) => {
   try {
     const scores = await Leaderboard.find().sort({ score: -1 });
+    console.log("Fetched scores from MongoDB:", scores); // Log the fetched data
     res.json(scores);
   } catch (error) {
+    console.error("Error fetching leaderboard data:", error); // Log errors if any
     res.status(500).json({ message: "Error fetching leaderboard data" });
   }
 });
