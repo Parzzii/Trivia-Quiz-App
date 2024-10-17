@@ -12,6 +12,7 @@ import Friends from "./components/Friends";
 import Random from "./components/Random"; // Corrected import statement
 import FetchQuestions from "./components/fetchQuestions"; // Adjusted import case
 import Leaderboard from "./components/Leaderboard";
+import AddFriends from "./components/AddFriends";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/friends" element={<Friends />} />
           <Route path="/leaderboard" element={<Leaderboard />} /> {/* Path to leaderboard */}
           <Route path="/fetch-questions/:topicId/:difficulty" element={<FetchQuestions />} />
+          <Route path="/add-friends" element={<AddFriends />} />
         </Routes>
       </div>
     </Router>

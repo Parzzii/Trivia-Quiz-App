@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap");
 
-/*Register.css*/
 /* General styles */
 :root {
   --primary-color: #4caf50;
@@ -10,11 +9,13 @@
   --form-background: #33ccd0;
   --text-color: #333;
   --border-radius: 10px;
+  --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
 body {
   margin: 0;
   font-family: "PT Sans", Arial, sans-serif;
+  background-color: var(--background-color);
 }
 
 /* Register container */
@@ -24,7 +25,7 @@ body {
   justify-content: center;
   min-height: 100vh;
   padding: 40px 20px;
-  background: #d6f6ff;
+  background: linear-gradient(to right, #d6f6ff, #b8e0e0);
 }
 
 /* Register form */
@@ -34,15 +35,13 @@ body {
   align-items: center;
   justify-content: center;
   width: 90%;
-  max-width: 500px; 
+  max-width: 500px;
   background-color: var(--form-background);
   padding: 20px;
-  font-size: 90px !important;
+  font-size: 24px; /* Adjusted to a more appropriate size */
   border-radius: var(--border-radius);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 20px var(--shadow-color);
   animation: slideIn 0.5s ease;
-  margin-top: 60px; 
-  margin-bottom: 60px; 
 }
 
 /* Animation */
@@ -62,7 +61,7 @@ body {
   text-align: center;
   color: #000;
   font-family: "Comic Neue", Arial, sans-serif;
-  font-size: 64px;
+  font-size: 36px; /* Adjusted font size for better readability */
   font-weight: 700;
   margin-bottom: 20px;
   line-height: normal;
@@ -80,7 +79,7 @@ body {
 
 .register-form label {
   margin-bottom: 5px;
-  font-size: 20px;
+  font-size: 18px; /* Adjusted font size */
 }
 
 /* Input styling */
@@ -93,8 +92,6 @@ body {
   padding: 10px;
   font-size: 24px;
   font-family: "PT Sans", Arial, sans-serif;
-  font-weight: 400;
-  line-height: normal;
   color: #636b6a;
   border: 1px solid #ddd;
   transition: border-color 0.3s;
@@ -120,10 +117,10 @@ body {
 .back-button {
   background-color: #7539a9;
   color: white;
-  padding: 15px 30px; 
+  padding: 15px 30px;
   border: none;
   border-radius: var(--border-radius);
-  font-size: 32px;
+  font-size: 24px; /* Adjusted font size */
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;
   width: auto;
@@ -133,40 +130,35 @@ body {
 /* Hover effect for buttons */
 .submit-button:hover,
 .back-button:hover {
-  background-color: #5e308d; 
-  transform: scale(1.05); 
+  background-color: #5e308d;
+  transform: scale(1.05);
 }
 
 /* Back button specific style */
 .back-button {
-  background-color: #ff5722; 
+  background-color: #ff5722;
 }
 
 .back-button:hover {
-  background-color: #e64a19; 
+  background-color: #e64a19;
 }
 
 /* Responsive design */
-/* Mobile devices: 320px to 480px */
 @media (max-width: 480px) {
- 
+  .register-form h1 {
+    font-size: 28px; /* Smaller font size for mobile */
+  }
+
+  .submit-button,
+  .back-button {
+    font-size: 20px; /* Smaller font size for buttons */
+  }
 }
-
-/* Tablets: 481px to 768px */
-@media (min-width: 481px) and (max-width: 768px) {
- 
-}
-
-/* Laptops: 769px to 1024px */
-@media (min-width: 769px) and (max-width: 1024px) {
-
-}
-
-/* Desktops: 1025px to 1200px */
-@media (min-width: 1025px) and (max-width: 1200px) {
- 
-}
-
-/* Large screens: Greater than 1200px */
-@media (min-width: 1201px) {
+.timer-bar {
+  height: 10px; /* Adjust the height as needed */
+  background-color: #4caf50; /* Color of the timer bar */
+  transition: width 0.1s linear; /* Smooth transition */
+  position: relative; /* Position relative for any absolute elements */
+  margin: 20px 0; /* Space around the timer bar */
+  border-radius: 5px; /* Optional: Rounded corners */
 }

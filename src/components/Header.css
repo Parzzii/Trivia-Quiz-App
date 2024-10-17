@@ -54,14 +54,14 @@ body {
 .login-button,
 .register-button {
   color: white;
-  padding: 8px 16px;
-  font-size: 20px;
+  padding: 8px 8px;
+  font-size: 18px;
   border-radius: 20px;
 background: var(--Green, #40CE74);
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
   border: none;
-  width: 100px;
+  width: 120px;
   height: 50px;
 flex-shrink: 0;
   font-family: "Comic Neue", Arial, sans-serif;

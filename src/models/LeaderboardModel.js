@@ -4,8 +4,7 @@ const leaderboardSchema = new mongoose.Schema({
   name: { type: String, required: true },
   score: { type: Number, required: true },
   gameMode: { type: String, default: "easy" },
-  createdAt: { type: Date, default: Date.now },
 });
 
-const Leaderboard = mongoose.model("Leaderboard", leaderboardSchema);
+const Leaderboard = mongoose.model("leaderboard", leaderboardSchema);
 module.exports = Leaderboard;
