@@ -4,22 +4,28 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const leaderboardRoutes = require("./src/routes/leaderboardRoutes");
 
+require("dotenv").config();
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+app.use(cors({ origin: "*" }));
 
 // Middleware
 app.use(cors()); // Enable CORS
 app.use(express.json());
 
 mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => console.log("MongoDB connected"))
+  .connect("mongodb+srv://Rhedaoo:Qwerty123@triviaapp.d3n7l.mongodb.net/trivia?retryWrites=true&w=majority")
+  .then(() => {
+    console.log("MongoDB connected"); // Add this to confirm connection
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
   .catch((err) => console.error("MongoDB connection error:", err));
 
 app.use("/api/leaderboard", leaderboardRoutes);
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
