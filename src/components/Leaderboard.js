@@ -9,7 +9,7 @@ const Leaderboard = () => {
   useEffect(() => {
     const fetchScores = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/leaderboard");
+        const response = await fetch("http://localhost:5002/api/leaderboard");
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         setScores(data);

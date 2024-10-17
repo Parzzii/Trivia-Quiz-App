@@ -8,10 +8,7 @@ require("dotenv").config();
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const PORT = process.env.PORT;
 app.use(cors({ origin: "*" }));
 
 // Middleware
@@ -19,7 +16,7 @@ app.use(cors()); // Enable CORS
 app.use(express.json());
 
 mongoose
-  .connect("mongodb+srv://Rhedaoo:Qwerty123@triviaapp.d3n7l.mongodb.net/trivia?retryWrites=true&w=majority")
+  .connect("mongodb+srv://Rhedaoo:Qwerty123@triviaapp.d3n7l.mongodb.net/Trivia?retryWrites=true&w=majority")
   .then(() => {
     console.log("MongoDB connected"); // Add this to confirm connection
     app.listen(PORT, () => {

@@ -5,90 +5,127 @@ import Header from "./Header";
 import Footer from "./Footer";
 
 const Random = () => {
-  const [question, setQuestion] = useState(null);
-  const [answers, setAnswers] = useState([]);
+  const [questions, setQuestions] = useState([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
-  const [showNextQuestion, setShowNextQuestion] = useState(false);
-  const [progress, setProgress] = useState(100);
-  const [timerActive, setTimerActive] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [bonusQuestionIndex, setBonusQuestionIndex] = useState(0); // State for tracking bonus question index
+  const [bonusQuestions, setBonusQuestions] = useState([]); // State to hold bonus questions
+  const [progress, setProgress] = useState(100); // Progress bar state
+  const [isCountdown, setIsCountdown] = useState(true); // State to track countdown
+  const [countdown, setCountdown] = useState(3); // Countdown state
 
-  const navigate = useNavigate();
-
-  const fetchQuestion = async () => {
+  const fetchQuestions = async () => {
     setLoading(true);
     try {
-      const response = await fetch("https://opentdb.com/api.php?amount=1&type=multiple");
+      const response = await fetch("https://opentdb.com/api.php?amount=5&type=multiple");
       const data = await response.json();
 
       if (!data.results || data.results.length === 0) {
         throw new Error("No questions found in the API response.");
       }
 
-      const triviaData = data.results[0];
+      const formattedQuestions = data.results.map((questionData) => ({
+        question: questionData.question,
+        correctAnswer: questionData.correct_answer,
+        answers: [...questionData.incorrect_answers, questionData.correct_answer].sort(() => Math.random() - 0.5),
+      }));
 
-      const formattedQuestion = {
-        question: triviaData.question,
-        correctAnswer: triviaData.correct_answer,
-        answers: [...triviaData.incorrect_answers, triviaData.correct_answer].sort(() => Math.random() - 0.5),
-      };
-
-      setQuestion(formattedQuestion);
-      setAnswers(formattedQuestion.answers);
-      resetState(); // Reset states on new question load
+      setQuestions(formattedQuestions);
     } catch (error) {
-      console.error("Error fetching question:", error);
-      console.log("Failed to load question. Please try again.");
+      console.error("Error fetching questions:", error);
     } finally {
       setLoading(false);
     }
   };
 
-  const resetState = () => {
+  const fetchBonusQuestions = async () => {
+    // Fetch an additional set of bonus questions
+    setLoading(true);
+    try {
+      const response = await fetch("https://opentdb.com/api.php?amount=5&type=multiple");
+      const data = await response.json();
+
+      if (!data.results || data.results.length === 0) {
+        throw new Error("No questions found in the API response.");
+      }
+
+      const formattedQuestions = data.results.map((questionData) => ({
+        question: questionData.question,
+        correctAnswer: questionData.correct_answer,
+        answers: [...questionData.incorrect_answers, questionData.correct_answer].sort(() => Math.random() - 0.5),
+      }));
+
+      setBonusQuestions(formattedQuestions);
+    } catch (error) {
+      console.error("Error fetching bonus questions:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchQuestions(); // Load questions on component mount
+  }, []);
+
+  useEffect(() => {
+    if (selectedAnswer !== null) {
+      const timerId = setTimeout(() => {
+        handleNextQuestion(); // Move to next question after 3 seconds
+      }, 3000); // 3 seconds timer
+
+      // Animate the progress bar
+      const progressInterval = setInterval(() => {
+        setProgress((prev) => Math.max(prev - 100 / 30, 0)); // Decrease progress over 3 seconds
+      }, 100); // Adjust this interval as needed
+
+      return () => {
+        clearTimeout(timerId); // Cleanup the timer on component unmount or reset
+        clearInterval(progressInterval); // Cleanup the progress interval
+      };
+    }
+  }, [selectedAnswer]);
+
+  const handleAnswerClick = (answer) => {
+    if (selectedAnswer === null) {
+      setSelectedAnswer(answer);
+      setIsCorrect(answer === questions[currentQuestionIndex].correctAnswer);
+      setShowCorrectAnswer(true);
+
+      if (answer === questions[currentQuestionIndex].correctAnswer) {
+        setCorrectAnswers((prev) => prev + 1);
+      } else {
+        setGameOver(true); // Show Game Over if answer is wrong
+      }
+    }
+  };
+
+  const handleNextQuestion = () => {
     setSelectedAnswer(null);
     setIsCorrect(null);
     setShowCorrectAnswer(false);
-    setShowNextQuestion(false);
-    setProgress(100);
-    setTimerActive(false);
-  };
+    setProgress(100); // Reset progress for next question
 
-  useEffect(() => {
-    fetchQuestion(); // Load a question on component mount
-  }, []);
-
-  // Smooth progress bar countdown logic
-  useEffect(() => {
-    if (timerActive && progress > 0) {
-      const interval = setInterval(() => {
-        setProgress((prevProgress) => {
-          const newProgress = prevProgress - 2.5; // Decrease progress in small steps
-          if (newProgress <= 0) {
-            clearInterval(interval);
-            setTimeout(() => setShowNextQuestion(true), 500); // Small delay before showing the button
-          }
-          return newProgress;
-        });
-      }, 62.5); // Update every 62.5ms for smooth animation over 4 seconds
-
-      return () => clearInterval(interval);
-    }
-  }, [timerActive, progress]);
-
-  const handleAnswerClick = (answer) => {
-    // Only set the selected answer if no answer has been chosen yet
-    if (selectedAnswer === null) {
-      setSelectedAnswer(answer);
-      setIsCorrect(answer === question.correctAnswer);
-      setShowCorrectAnswer(true); // Show correct answer after user selects an answer
-      setTimerActive(true); // Start the timer after the answer is selected
+    // Check if the user has answered all questions correctly
+    if (currentQuestionIndex + 1 === questions.length && correctAnswers === questions.length) {
+      setBonusQuestionIndex(0); // Reset bonus question index
+      fetchBonusQuestions(); // Fetch new bonus questions
+    } else if (currentQuestionIndex + 1 < questions.length) {
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+    } else if (bonusQuestionIndex < bonusQuestions.length) {
+      setCurrentQuestionIndex(0); // Reset index for bonus questions
+      setBonusQuestionIndex((prevIndex) => prevIndex + 1);
+    } else {
+      fetchQuestions(); // Fetch new questions if all are answered
     }
   };
 
-  const handleNextQuestionClick = () => {
-    fetchQuestion(); // Fetch a new question when the button is clicked
+  const handlePlayAgain = () => {
+    window.location.reload(); // Reloads the current page
   };
 
   return (
@@ -96,44 +133,56 @@ const Random = () => {
       <Header />
       <div className="random-container">
         {loading ? (
-          <p>Loading question...</p>
+          <p>Loading questions...</p>
+        ) : gameOver ? (
+          <>
+            <h2>Game Over!</h2>
+            <p>Your score: {correctAnswers}</p>
+            <button className="random-replay-btn" onClick={handlePlayAgain}>
+              Play Again
+            </button>
+          </>
         ) : (
           <>
-            {question && (
+            {bonusQuestionIndex > 0 && (
+              <h2>{`Bonus Question ${bonusQuestionIndex}`}</h2> // Show bonus question message
+            )}
+            {questions[currentQuestionIndex] && (
               <>
-                <h2 dangerouslySetInnerHTML={{ __html: question.question }} />
+                <h2 dangerouslySetInnerHTML={{ __html: questions[currentQuestionIndex].question }} />
                 <ul>
-                  {answers.map((answer, index) => (
-                    <li
-                      key={index}
-                      className={`random-answer-option 
-                        ${selectedAnswer === answer ? (isCorrect ? "correct" : "selected") : ""}
-                        ${showCorrectAnswer && answer === question.correctAnswer ? "correct" : ""}
-                      `}
-                      onClick={() => handleAnswerClick(answer)}
-                      dangerouslySetInnerHTML={{ __html: answer }}
-                    />
-                  ))}
+                  {bonusQuestionIndex > 0
+                    ? // Render bonus questions
+                      bonusQuestions[bonusQuestionIndex - 1]?.answers.map((answer, index) => (
+                        <li
+                          key={index}
+                          className={`random-answer-option 
+                          ${selectedAnswer === answer ? (isCorrect ? "correct" : "selected") : ""} 
+                          ${showCorrectAnswer && answer === bonusQuestions[bonusQuestionIndex - 1].correctAnswer ? "correct" : ""}`}
+                          onClick={() => handleAnswerClick(answer)}
+                          dangerouslySetInnerHTML={{ __html: answer }}
+                        />
+                      ))
+                    : // Render regular questions
+                      questions[currentQuestionIndex].answers.map((answer, index) => (
+                        <li
+                          key={index}
+                          className={`random-answer-option 
+                          ${selectedAnswer === answer ? (isCorrect ? "correct" : "selected") : ""} 
+                          ${showCorrectAnswer && answer === questions[currentQuestionIndex].correctAnswer ? "correct" : ""}`}
+                          onClick={() => handleAnswerClick(answer)}
+                          dangerouslySetInnerHTML={{ __html: answer }}
+                        />
+                      ))}
                 </ul>
               </>
             )}
 
             {/* Display feedback after an answer is selected */}
-            {selectedAnswer && <p className={isCorrect ? "correct-text" : "incorrect-text"}>{isCorrect ? "Correct!" : `Incorrect! The correct answer is: ${question.correctAnswer}`}</p>}
+            {selectedAnswer && <p className={isCorrect ? "correct-text" : "incorrect-text"}>{isCorrect ? "Correct!" : `Incorrect! The correct answer is: ${bonusQuestionIndex > 0 ? bonusQuestions[bonusQuestionIndex - 1].correctAnswer : questions[currentQuestionIndex].correctAnswer}`}</p>}
 
-            {/* Progress bar animation, starts only after an answer is clicked */}
-            {selectedAnswer && (
-              <div className="random-progress-bar-wrapper">
-                <div className="random-progress-bar" style={{ width: `${progress}%` }}></div>
-              </div>
-            )}
-
-            {/* Show "Next Question" button only when the progress bar finishes */}
-            {showNextQuestion && (
-              <button className="random-next-question-btn random-fade-in" onClick={handleNextQuestionClick}>
-                Next Question
-              </button>
-            )}
+            {/* Timer Bar */}
+            <div className="timer-bar" style={{ width: `${progress}%` }} />
           </>
         )}
       </div>
