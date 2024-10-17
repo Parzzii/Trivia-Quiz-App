@@ -63,14 +63,14 @@ function Friends() {
                 Leaderboard
               </button>
             </li>
-            <li>
+            {/* <li>
               <button
                 className="nav-item"
                 onClick={() => handleNavigation("/notifications")}
               >
                 Notifications
               </button>
-            </li>
+            </li> */}
           </ul>
         </nav>
 
