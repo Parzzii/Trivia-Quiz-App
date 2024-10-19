@@ -31,8 +31,8 @@ const Header = () => {
         <button className="random-button" onClick={() => navigate("/random")}>
           {t("random")} {/* Translation key for "Register" */}
         </button>
-        <button className="friends-button" onClick={() => navigate("/friends")}>
-          {t("friends")} {/* Translation key for "Register" */}
+        <button className="friends-button" onClick={() => navigate("/Leaderboard")}>
+          {t("Leaderboard")} {/* Translation key for "Register" */}
         </button>
       </div>
     </header>

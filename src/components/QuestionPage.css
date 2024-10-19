@@ -4,6 +4,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100%; /* Ensure the entire viewport is filled */
+  font-family: Arial, sans-serif; /* Use a clean, modern font */
 }
 
 /* Main container for the Question page */
@@ -15,33 +16,27 @@ body {
   min-height: 100vh;
   background-color: #f0f4f8; /* Light blueish background */
   padding: 20px;
-  font-family: Arial, sans-serif;
 }
 
-/* Question container for question and answers */
+/* Question container for the question and answers */
 .question-container {
   background-color: #ffffff;
-  border: 2px solid #007bff;
+  border: 2px solid #007bff; /* Border color matches blue accent */
   border-radius: 10px;
   max-width: 650px;
   width: 100%;
   padding: 30px;
   margin: 20px auto;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
 }
 
 /* Question number styling */
 .question-number {
   font-size: 18px;
-  color: #007bff; /* Blue color for contrast */
+  color: #007bff; /* Accent color for question number */
   font-weight: bold;
   margin-bottom: 15px;
-  text-align: center;
 }
 
 /* Question text styling */
@@ -49,7 +44,7 @@ body {
   font-size: 26px;
   font-weight: bold;
   margin-bottom: 20px;
-  color: #333; /* Darker color for better contrast */
+  color: #333; /* Darker color for readability */
 }
 
 /* Answer option styling */
@@ -62,11 +57,11 @@ body {
   cursor: pointer;
   text-align: center;
   transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  color: #000000; /* Darker text color */
-  font-weight: bold; /* Bold text for emphasis */
+  color: #000; /* Darker text color for readability */
+  font-weight: bold;
 }
 
-/* Answer list styling */
+/* Remove list styles from answers */
 .question-container ul {
   list-style-type: none;
   padding: 0;
@@ -74,7 +69,7 @@ body {
   margin: 0;
 }
 
-/* Hover effect with blue color */
+/* Hover effect for answer options */
 .answer-option:hover {
   background-color: #007bff; /* Blue on hover */
   transform: scale(1.05);
@@ -82,34 +77,15 @@ body {
   color: white;
 }
 
-/* Styling for selected and correct answers */
+/* Styling for selected and correct/incorrect answers */
 .answer-option.selected {
-  background-color: #f44336;
+  background-color: #f44336; /* Red for incorrect answer */
   color: white;
 }
 
 .answer-option.correct {
-  background-color: #4caf50;
+  background-color: #4caf50; /* Green for correct answer */
   color: white;
-}
-
-/* Progress bar container */
-.progress-bar-wrapper {
-  width: 100%;
-  background-color: #dcedc8; /* Light green background for progress */
-  height: 25px;
-  border-radius: 10px;
-  margin-top: 20px;
-  overflow: hidden;
-  border: 2px solid #007bff;
-}
-
-/* Progress bar styling */
-.progress-bar {
-  height: 100%;
-  background-color: #ff5722; /* Orange progress bar */
-  border-radius: 10px;
-  transition: width 0.0625s linear;
 }
 
 /* Button for next question */
@@ -122,10 +98,9 @@ body {
   border-radius: 5px;
   font-size: 18px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  display: block;
+  transition: background-color 0.3s ease, transform 0.3s ease;
   opacity: 0;
-  visibility: hidden;
+  visibility: hidden; /* Hidden by default */
 }
 
 /* Fade-in animation for next question button */
@@ -133,13 +108,12 @@ body {
   animation: fadeIn 0.5s forwards;
 }
 
-/* Keyframes for fade-in effect */
 @keyframes fadeIn {
-  0% {
+  from {
     opacity: 0;
     visibility: hidden;
   }
-  100% {
+  to {
     opacity: 1;
     visibility: visible;
   }
@@ -148,11 +122,13 @@ body {
 /* Button hover effect */
 .next-question-btn:hover {
   background-color: #388e3c;
+  transform: scale(1.05);
 }
 
 /* End of quiz section styling */
 .score-section {
   text-align: center;
+  padding: 20px;
 }
 
 /* Style for the final action buttons (Answers, Replay, Back, Skip) */
@@ -181,17 +157,42 @@ body {
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Hover effect for the buttons */
+/* Hover effect for the end option buttons */
 .end-options button:hover {
   background-color: #0056b3;
   transform: scale(1.05);
 }
 
-/* Add some box shadow to make buttons stand out */
-.end-options button {
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
 .end-options button:active {
   transform: scale(1);
+}
+
+.end-options button {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+/* Styling for hit chance button */
+.hit-chance-btn {
+  background-color: #ffcc00; /* Yellow for hit chance button */
+  color: #000;
+  border: none;
+  padding: 10px 15px;
+  margin-left: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.hit-chance-btn:hover {
+  background-color: #ff9900;
+}
+
+/* Question header: Aligns question number and hit chance button */
+.question-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Ensures the button stays close to the question number */
 }
