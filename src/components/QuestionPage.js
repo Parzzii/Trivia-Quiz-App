@@ -22,6 +22,8 @@ const QuestionPage = () => {
   const [allCorrect, setAllCorrect] = useState(false);
   const [hitChances, setHitChances] = useState(2);
   const [usedHitChance, setUsedHitChance] = useState(false);
+  const [answeredQuestions, setAnsweredQuestions] = useState([]); // Store answered questions
+  const [showAnswers, setShowAnswers] = useState(false); // Show answers state
 
   const fetchQuestions = async () => {
     if (!topicId || !difficulty) {
@@ -67,6 +69,15 @@ const QuestionPage = () => {
       } else {
         setScore((prevScore) => prevScore - 5);
       }
+
+      // Add the question and correct answer to the answeredQuestions state
+      setAnsweredQuestions((prevAnswered) => [
+        ...prevAnswered,
+        {
+          question: questions[currentQuestionIndex].question,
+          correctAnswer: questions[currentQuestionIndex].correctAnswer,
+        },
+      ]);
     }
   };
 
@@ -132,6 +143,10 @@ const QuestionPage = () => {
     navigate("/");
   };
 
+  const handleShowAnswers = () => {
+    setShowAnswers(true);
+  };
+
   return (
     <div className="question-page-container">
       <Header />
@@ -146,11 +161,30 @@ const QuestionPage = () => {
             <h2>Your Final Score</h2>
             <p>{score}</p>
             {allCorrect && <h3>Congratulations! You got all answers right!</h3>}
+
+            {!showAnswers && (
+              <button onClick={handleShowAnswers} className="show-answers-btn">
+                Show Answers
+              </button>
+            )}
+
+            {showAnswers && (
+              <div className="answered-questions">
+                <h3>Questions and Correct Answers:</h3>
+                <ul>
+                  {answeredQuestions.map((item, index) => (
+                    <li key={index}>
+                      <strong>Q:</strong> <span dangerouslySetInnerHTML={{ __html: item.question }} />
+                      <br />
+                      <strong>Correct Answer:</strong> <span dangerouslySetInnerHTML={{ __html: item.correctAnswer }} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             <div className="end-options">
               <ul>
-                <li>
-                  <button onClick={() => console.log(questions)}>Answers</button>
-                </li>
                 <li>
                   <button onClick={handleReplay}>Replay</button>
                 </li>

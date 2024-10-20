@@ -1,48 +1,95 @@
-/* General body styling */
+/* General body settings */
 body {
   margin: 0;
   padding: 0;
   font-family: "Comic Neue", Arial, sans-serif;
   background-color: #f4f4f4;
-}
-
-/* Container settings */
-.home-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; /* Disable page scrolling */
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  justify-content: space-between;
-  font-family: "Comic Neue", Arial, sans-serif;
 }
 
-/* Main content styling */
+/* Fix header to the top */
+.home-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #333;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  z-index: 1;
+}
+
+.logo {
+  cursor: pointer;
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.logo:hover {
+  color: #ff6f61;
+}
+
+/* Fix footer to the bottom */
+.home-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #333;
+  color: white;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 1;
+}
+
+/* Main content container adjusts to fill space between header and footer */
 .main {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 40px;
-  position: relative;
+  margin-top: 80px; /* Offset for header */
+  margin-bottom: 60px; /* Offset for footer */
+  overflow-y: auto; /* Allow scrolling within the main content area */
 }
 
-/* Title and subtitle */
+/* Title and subtitle styling */
 .home-title {
   font-size: 48px;
   color: #333;
   text-transform: uppercase;
   letter-spacing: 3px;
-  animation: fadeInDown 1s ease-out;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 .home-subtitle {
-  font-size: 20px;
-  margin: 20px 0;
+  font-size: 24px;
   color: #666;
+  margin-bottom: 30px;
 }
 
-/* Play button wrapper for glow effect */
+/* Button wrapper for glow effect */
 .button-wrapper {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Glow element styling */
@@ -55,7 +102,7 @@ body {
   animation: revolve 3s infinite linear;
   top: -30px;
   left: -30px;
-  z-index: -1; 
+  z-index: -1;
 }
 
 /* Play button with multicolor neon effect */
@@ -67,17 +114,18 @@ body {
   padding: 15px 40px;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 10px;
   position: relative;
   box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
   animation: bounce 2s infinite, glowing 3s infinite, neon 5s infinite;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
   font-family: "Comic Neue", Arial, sans-serif;
 }
 
 /* Play button hover effect */
 .play-button:hover {
   animation: glowing 1s infinite alternate;
+  transform: scale(1.05);
 }
 
 /* Glowing effect */
@@ -120,18 +168,6 @@ body {
   }
 }
 
-/* Title fade-in animation */
-@keyframes fadeInDown {
-  0% {
-    opacity: 0;
-    transform: translateY(-50px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* Revolving effect */
 @keyframes revolve {
   0% {
@@ -140,4 +176,39 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+
+/* Smooth animations for entering content */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.main {
+  animation: fadeIn 1.5s ease;
+}
+
+/* Scrollbar customization for the main content */
+.main::-webkit-scrollbar {
+  width: 8px;
+}
+
+.main::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.main::-webkit-scrollbar-thumb {
+  background-color: #ff6f61;
+  border-radius: 10px;
+  border: 2px solid transparent;
+}
+
+.main::-webkit-scrollbar-thumb:hover {
+  background-color: #ff4500;
 }

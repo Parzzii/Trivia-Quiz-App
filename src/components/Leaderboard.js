@@ -12,7 +12,9 @@ const Leaderboard = () => {
         const response = await fetch("http://localhost:5002/api/leaderboard");
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
-        setScores(data);
+        // Sort scores in descending order based on the score property
+        const sortedData = data.sort((a, b) => b.score - a.score);
+        setScores(sortedData);
       } catch (error) {
         console.error("Error fetching scores:", error);
       }
