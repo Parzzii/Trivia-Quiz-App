@@ -5,9 +5,10 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #ffffff; /* Ensuring background is white */
+  background: #d6f6ff; 
   padding: 20px;
   font-family: Arial, sans-serif;
+
 }
 
 /* Random container for question and answers */
