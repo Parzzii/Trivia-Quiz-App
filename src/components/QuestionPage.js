@@ -20,14 +20,15 @@ const QuestionPage = () => {
   const [quizEnded, setQuizEnded] = useState(false);
   const [score, setScore] = useState(0);
   const [allCorrect, setAllCorrect] = useState(false);
-  const [hitChances, setHitChances] = useState(2);
-  const [usedHitChance, setUsedHitChance] = useState(false);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [showAnswers, setShowAnswers] = useState(false);
+  const [hitChances, setHitChances] = useState(2); // Number of hints available
+  const [usedHitChance, setUsedHitChance] = useState(false); // Check if hint was used on current question
 
-  // Using useRef for stable references to audio files
+  // Audio references
   const backgroundMusic = useRef(new Audio("/background-music.mp3"));
   const endQuizSound = useRef(new Audio("/celebration.mp3"));
+  const perfectScoreSound = useRef(new Audio("/perfect-score.mp3")); // Special sound for perfect score
 
   useEffect(() => {
     fetchQuestions();
@@ -49,16 +50,22 @@ const QuestionPage = () => {
 
   useEffect(() => {
     if (quizEnded) {
-      // Stop background music completely
+      // Stop background music
       backgroundMusic.current.pause();
       backgroundMusic.current.currentTime = 0;
 
-      // Play the end quiz sound
-      endQuizSound.current.play().catch((error) => {
-        console.error("Audio play error:", error);
-      });
+      // Play special soundtrack if all answers are correct, else play endQuizSound
+      if (allCorrect) {
+        perfectScoreSound.current.play().catch((error) => {
+          console.error("Perfect score sound play error:", error);
+        });
+      } else {
+        endQuizSound.current.play().catch((error) => {
+          console.error("End quiz sound play error:", error);
+        });
+      }
     }
-  }, [quizEnded]);
+  }, [quizEnded, allCorrect]);
 
   const fetchQuestions = async () => {
     if (!topicId || !difficulty) {
@@ -115,12 +122,12 @@ const QuestionPage = () => {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       resetQuestionState();
     } else {
-      handleEndQuiz();
+      handleEndQuiz(); // End quiz if it's the last question
       setQuizEnded(true);
 
       const maxScore = difficulty === "hard" ? 200 : difficulty === "medium" ? 140 : 100;
       if (score === maxScore) {
-        setAllCorrect(true);
+        setAllCorrect(true); // Trigger perfect score confetti and special soundtrack
       }
     }
   };
@@ -130,7 +137,7 @@ const QuestionPage = () => {
     setIsCorrect(null);
     setShowCorrectAnswer(false);
     setShowNextQuestion(false);
-    setUsedHitChance(false);
+    setUsedHitChance(false); // Reset hint usage for the next question
   };
 
   const handleEndQuiz = async () => {
@@ -139,6 +146,26 @@ const QuestionPage = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: playerName, score, gameMode: difficulty }),
     });
+  };
+
+  // Hint Feature Logic
+  const useHitChance = () => {
+    if (hitChances > 0 && !usedHitChance && questions[currentQuestionIndex]) {
+      const currentAnswers = questions[currentQuestionIndex].answers;
+      const wrongAnswers = currentAnswers.filter((answer) => answer !== questions[currentQuestionIndex].correctAnswer);
+
+      if (wrongAnswers.length > 0) {
+        const randomWrongAnswer = wrongAnswers[Math.floor(Math.random() * wrongAnswers.length)];
+
+        const updatedAnswers = currentAnswers.filter((answer) => answer !== randomWrongAnswer);
+        const updatedQuestions = [...questions];
+        updatedQuestions[currentQuestionIndex].answers = updatedAnswers;
+        setQuestions(updatedQuestions);
+
+        setUsedHitChance(true);
+        setHitChances((prevChances) => prevChances - 1);
+      }
+    }
   };
 
   const handleReplay = () => {
@@ -208,6 +235,11 @@ const QuestionPage = () => {
                   <p className="question-number">
                     Question {currentQuestionIndex + 1} of {questions.length}
                   </p>
+                  {hitChances > 0 && !usedHitChance && (
+                    <button className="hit-chance-btn" onClick={useHitChance}>
+                      Use Hint ({hitChances} left)
+                    </button>
+                  )}
                 </div>
 
                 <h2 dangerouslySetInnerHTML={{ __html: questions[currentQuestionIndex].question }} />
@@ -217,8 +249,7 @@ const QuestionPage = () => {
                       key={index}
                       className={`answer-option 
                         ${selectedAnswer === answer ? (isCorrect ? "correct" : "selected") : ""} 
-                        ${showCorrectAnswer && answer === questions[currentQuestionIndex].correctAnswer ? "correct" : ""}
-                      `}
+                        ${showCorrectAnswer && answer === questions[currentQuestionIndex].correctAnswer ? "correct" : ""}`}
                       onClick={() => handleAnswerClick(answer)}
                       dangerouslySetInnerHTML={{ __html: answer }}
                     />
