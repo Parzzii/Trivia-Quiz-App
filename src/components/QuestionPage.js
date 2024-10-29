@@ -20,25 +20,28 @@ const QuestionPage = () => {
   const [quizEnded, setQuizEnded] = useState(false);
   const [score, setScore] = useState(0);
   const [allCorrect, setAllCorrect] = useState(false);
-  const [hitChances, setHitChances] = useState(2);
-  const [usedHitChance, setUsedHitChance] = useState(false);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [showAnswers, setShowAnswers] = useState(false);
+  const [hitChances, setHitChances] = useState(2); // Number of hints available
+  const [usedHitChance, setUsedHitChance] = useState(false); // Check if hint was used on current question
 
-  // Using useRef for stable references to audio files
+  // Audio references
   const backgroundMusic = useRef(new Audio("/background-music.mp3"));
   const endQuizSound = useRef(new Audio("/celebration.mp3"));
+  const perfectScoreSound = useRef(new Audio("/perfect-score.mp3")); // Special sound for perfect score
 
   useEffect(() => {
     fetchQuestions();
   }, [topicId, difficulty]);
 
   useEffect(() => {
+    // Play background music and set it to loop
     backgroundMusic.current.loop = true;
     backgroundMusic.current.play().catch((error) => {
       console.error("Audio play error:", error);
     });
 
+    // Pause and reset music when component unmounts
     return () => {
       backgroundMusic.current.pause();
       backgroundMusic.current.currentTime = 0;
@@ -47,13 +50,22 @@ const QuestionPage = () => {
 
   useEffect(() => {
     if (quizEnded) {
+      // Stop background music
       backgroundMusic.current.pause();
       backgroundMusic.current.currentTime = 0;
-      endQuizSound.current.play().catch((error) => {
-        console.error("Audio play error:", error);
-      });
+
+      // Play special soundtrack if all answers are correct, else play endQuizSound
+      if (allCorrect) {
+        perfectScoreSound.current.play().catch((error) => {
+          console.error("Perfect score sound play error:", error);
+        });
+      } else {
+        endQuizSound.current.play().catch((error) => {
+          console.error("End quiz sound play error:", error);
+        });
+      }
     }
-  }, [quizEnded]);
+  }, [quizEnded, allCorrect]);
 
   const fetchQuestions = async () => {
     if (!topicId || !difficulty) {
@@ -110,12 +122,12 @@ const QuestionPage = () => {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       resetQuestionState();
     } else {
-      handleEndQuiz();
+      handleEndQuiz(); // End quiz if it's the last question
       setQuizEnded(true);
 
       const maxScore = difficulty === "hard" ? 200 : difficulty === "medium" ? 140 : 100;
       if (score === maxScore) {
-        setAllCorrect(true);
+        setAllCorrect(true); // Trigger perfect score confetti and special soundtrack
       }
     }
   };
@@ -125,7 +137,7 @@ const QuestionPage = () => {
     setIsCorrect(null);
     setShowCorrectAnswer(false);
     setShowNextQuestion(false);
-    setUsedHitChance(false);
+    setUsedHitChance(false); // Reset hint usage for the next question
   };
 
   const handleEndQuiz = async () => {
@@ -225,7 +237,7 @@ const QuestionPage = () => {
                   </p>
                   {hitChances > 0 && !usedHitChance && (
                     <button className="hit-chance-btn" onClick={useHitChance}>
-                      Use Hit Chance ({hitChances} left)
+                      Use Hint ({hitChances} left)
                     </button>
                   )}
                 </div>
