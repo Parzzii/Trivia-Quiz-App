@@ -34,13 +34,11 @@ const QuestionPage = () => {
   }, [topicId, difficulty]);
 
   useEffect(() => {
-    // Play background music and set it to loop
     backgroundMusic.current.loop = true;
     backgroundMusic.current.play().catch((error) => {
       console.error("Audio play error:", error);
     });
 
-    // Pause and reset music when component unmounts
     return () => {
       backgroundMusic.current.pause();
       backgroundMusic.current.currentTime = 0;
@@ -49,11 +47,8 @@ const QuestionPage = () => {
 
   useEffect(() => {
     if (quizEnded) {
-      // Stop background music completely
       backgroundMusic.current.pause();
       backgroundMusic.current.currentTime = 0;
-
-      // Play the end quiz sound
       endQuizSound.current.play().catch((error) => {
         console.error("Audio play error:", error);
       });
@@ -141,6 +136,26 @@ const QuestionPage = () => {
     });
   };
 
+  // Hint Feature Logic
+  const useHitChance = () => {
+    if (hitChances > 0 && !usedHitChance && questions[currentQuestionIndex]) {
+      const currentAnswers = questions[currentQuestionIndex].answers;
+      const wrongAnswers = currentAnswers.filter((answer) => answer !== questions[currentQuestionIndex].correctAnswer);
+
+      if (wrongAnswers.length > 0) {
+        const randomWrongAnswer = wrongAnswers[Math.floor(Math.random() * wrongAnswers.length)];
+
+        const updatedAnswers = currentAnswers.filter((answer) => answer !== randomWrongAnswer);
+        const updatedQuestions = [...questions];
+        updatedQuestions[currentQuestionIndex].answers = updatedAnswers;
+        setQuestions(updatedQuestions);
+
+        setUsedHitChance(true);
+        setHitChances((prevChances) => prevChances - 1);
+      }
+    }
+  };
+
   const handleReplay = () => {
     window.location.reload();
   };
@@ -208,6 +223,11 @@ const QuestionPage = () => {
                   <p className="question-number">
                     Question {currentQuestionIndex + 1} of {questions.length}
                   </p>
+                  {hitChances > 0 && !usedHitChance && (
+                    <button className="hit-chance-btn" onClick={useHitChance}>
+                      Use Hit Chance ({hitChances} left)
+                    </button>
+                  )}
                 </div>
 
                 <h2 dangerouslySetInnerHTML={{ __html: questions[currentQuestionIndex].question }} />
@@ -217,8 +237,7 @@ const QuestionPage = () => {
                       key={index}
                       className={`answer-option 
                         ${selectedAnswer === answer ? (isCorrect ? "correct" : "selected") : ""} 
-                        ${showCorrectAnswer && answer === questions[currentQuestionIndex].correctAnswer ? "correct" : ""}
-                      `}
+                        ${showCorrectAnswer && answer === questions[currentQuestionIndex].correctAnswer ? "correct" : ""}`}
                       onClick={() => handleAnswerClick(answer)}
                       dangerouslySetInnerHTML={{ __html: answer }}
                     />
