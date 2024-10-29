@@ -8,6 +8,8 @@
   min-height: 100vh;
   padding: 20px;
   background-color: #bdeff5; /* Light blue background */
+  font-family: "Comic Neue", Arial, sans-serif;
+
 }
 
 .contact-form {
@@ -25,6 +27,7 @@
   margin-bottom: 20px;
   color: #333; /* Darker text color */
   font-weight: 600; /* Slightly bolder */
+
 }
 
 .input-field,
@@ -37,6 +40,8 @@
   border: 1px solid #ccc;
   font-size: 1rem;
   transition: border-color 0.3s ease; /* Smooth transition for border */
+  font-family: "Comic Neue", Arial, sans-serif;
+
 }
 
 .input-field:focus,

@@ -4,7 +4,9 @@
   flex-direction: column;
   justify-content: space-between;
   min-height: 100vh;
-  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+  /* background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%); */
+  background: #d6f6ff; 
+
   font-family: "Poppins", sans-serif;
 }
 
@@ -28,6 +30,8 @@
   margin-bottom: 20px;
   text-transform: uppercase;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  /* font-family: "Comic Neue", Arial, sans-serif; */
+
 }
 
 /* Table container for responsive scrolling */

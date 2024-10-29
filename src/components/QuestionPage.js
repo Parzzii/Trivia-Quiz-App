@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Confetti from "react-confetti";
 import "./QuestionPage.css";
@@ -22,8 +22,43 @@ const QuestionPage = () => {
   const [allCorrect, setAllCorrect] = useState(false);
   const [hitChances, setHitChances] = useState(2);
   const [usedHitChance, setUsedHitChance] = useState(false);
-  const [answeredQuestions, setAnsweredQuestions] = useState([]); // Store answered questions
-  const [showAnswers, setShowAnswers] = useState(false); // Show answers state
+  const [answeredQuestions, setAnsweredQuestions] = useState([]);
+  const [showAnswers, setShowAnswers] = useState(false);
+
+  // Using useRef for stable references to audio files
+  const backgroundMusic = useRef(new Audio("/background-music.mp3"));
+  const endQuizSound = useRef(new Audio("/celebration.mp3"));
+
+  useEffect(() => {
+    fetchQuestions();
+  }, [topicId, difficulty]);
+
+  useEffect(() => {
+    // Play background music and set it to loop
+    backgroundMusic.current.loop = true;
+    backgroundMusic.current.play().catch((error) => {
+      console.error("Audio play error:", error);
+    });
+
+    // Pause and reset music when component unmounts
+    return () => {
+      backgroundMusic.current.pause();
+      backgroundMusic.current.currentTime = 0;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (quizEnded) {
+      // Stop background music completely
+      backgroundMusic.current.pause();
+      backgroundMusic.current.currentTime = 0;
+
+      // Play the end quiz sound
+      endQuizSound.current.play().catch((error) => {
+        console.error("Audio play error:", error);
+      });
+    }
+  }, [quizEnded]);
 
   const fetchQuestions = async () => {
     if (!topicId || !difficulty) {
@@ -51,26 +86,20 @@ const QuestionPage = () => {
     }
   };
 
-  useEffect(() => {
-    fetchQuestions();
-  }, [topicId, difficulty]);
-
   const handleAnswerClick = (answer) => {
     if (selectedAnswer === null) {
       setSelectedAnswer(answer);
       const correct = answer === questions[currentQuestionIndex].correctAnswer;
       setIsCorrect(correct);
       setShowCorrectAnswer(true);
-      setShowNextQuestion(true); // Ensure "Next Question" button is shown
+      setShowNextQuestion(true);
 
-      // Update score based on whether the answer is correct or not
       if (correct) {
         setScore((prevScore) => prevScore + 20);
       } else {
         setScore((prevScore) => prevScore - 5);
       }
 
-      // Add the question and correct answer to the answeredQuestions state
       setAnsweredQuestions((prevAnswered) => [
         ...prevAnswered,
         {
@@ -86,12 +115,12 @@ const QuestionPage = () => {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       resetQuestionState();
     } else {
-      handleEndQuiz(); // End quiz if it's the last question
+      handleEndQuiz();
       setQuizEnded(true);
 
       const maxScore = difficulty === "hard" ? 200 : difficulty === "medium" ? 140 : 100;
       if (score === maxScore) {
-        setAllCorrect(true); // Display confetti if all answers are correct
+        setAllCorrect(true);
       }
     }
   };
@@ -100,7 +129,7 @@ const QuestionPage = () => {
     setSelectedAnswer(null);
     setIsCorrect(null);
     setShowCorrectAnswer(false);
-    setShowNextQuestion(false); // Reset "Next Question" button for the next question
+    setShowNextQuestion(false);
     setUsedHitChance(false);
   };
 
@@ -112,35 +141,12 @@ const QuestionPage = () => {
     });
   };
 
-  const useHitChance = () => {
-    if (hitChances > 0 && !usedHitChance && questions[currentQuestionIndex]) {
-      const currentAnswers = questions[currentQuestionIndex].answers;
-      const wrongAnswers = currentAnswers.filter((answer) => answer !== questions[currentQuestionIndex].correctAnswer);
-
-      if (wrongAnswers.length > 0) {
-        const randomWrongAnswer = wrongAnswers[Math.floor(Math.random() * wrongAnswers.length)];
-
-        const updatedAnswers = currentAnswers.filter((answer) => answer !== randomWrongAnswer);
-        const updatedQuestions = [...questions];
-        updatedQuestions[currentQuestionIndex].answers = updatedAnswers;
-        setQuestions(updatedQuestions);
-
-        setUsedHitChance(true);
-        setHitChances((prevChances) => prevChances - 1);
-      }
-    }
-  };
-
   const handleReplay = () => {
     window.location.reload();
   };
 
   const handleBack = () => {
     navigate("/choose-topic");
-  };
-
-  const handleSkip = () => {
-    navigate("/");
   };
 
   const handleShowAnswers = () => {
@@ -191,9 +197,6 @@ const QuestionPage = () => {
                 <li>
                   <button onClick={handleBack}>Back</button>
                 </li>
-                <li>
-                  <button onClick={handleSkip}>Skip</button>
-                </li>
               </ul>
             </div>
           </div>
@@ -205,18 +208,9 @@ const QuestionPage = () => {
                   <p className="question-number">
                     Question {currentQuestionIndex + 1} of {questions.length}
                   </p>
-                  {hitChances > 0 && !usedHitChance && (
-                    <button className="hit-chance-btn" onClick={useHitChance}>
-                      Use Hit Chance ({hitChances} left)
-                    </button>
-                  )}
                 </div>
 
-                <h2
-                  dangerouslySetInnerHTML={{
-                    __html: questions[currentQuestionIndex].question,
-                  }}
-                />
+                <h2 dangerouslySetInnerHTML={{ __html: questions[currentQuestionIndex].question }} />
                 <ul>
                   {questions[currentQuestionIndex].answers.map((answer, index) => (
                     <li
@@ -233,7 +227,6 @@ const QuestionPage = () => {
 
                 {selectedAnswer && <p className={isCorrect ? "correct-text" : "incorrect-text"}>{isCorrect ? "Correct!" : `Incorrect! The correct answer is: ${questions[currentQuestionIndex].correctAnswer}`}</p>}
 
-                {/* Ensure the "Next Question" button is visible after answering */}
                 {showNextQuestion && (
                   <button className="next-question-btn fade-in" onClick={handleNextQuestionClick}>
                     Next Question
