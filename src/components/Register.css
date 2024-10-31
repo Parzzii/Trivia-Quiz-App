@@ -38,7 +38,7 @@ body {
   max-width: 500px;
   background-color: var(--form-background);
   padding: 20px;
-  font-size: 24px; /* Adjusted to a more appropriate size */
+  font-size: 30px; /* Adjusted to a more appropriate size */
   border-radius: var(--border-radius);
   box-shadow: 0 0 20px var(--shadow-color);
   animation: slideIn 0.5s ease;
@@ -61,10 +61,11 @@ body {
   text-align: center;
   color: #000;
   font-family: "Comic Neue", Arial, sans-serif;
-  font-size: 36px; /* Adjusted font size for better readability */
+  font-size: 80px; /* Adjusted font size for better readability */
   font-weight: 700;
   margin-bottom: 20px;
   line-height: normal;
+  margin-top: 10px;
 }
 
 /* Form group styling */
