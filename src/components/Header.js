@@ -7,33 +7,59 @@ const Header = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  // Retrieve username and token from localStorage
+  const username = localStorage.getItem("username");
+  const token = localStorage.getItem("token");
+
+  const handleLogout = () => {
+    // Clear user data from localStorage and navigate to home
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    navigate("/");
+  };
+
   return (
     <header className="header">
-      <div className="icon" onClick={() => navigate("/")}>
-        {/* Future icon will go here */}
+      {/* Center - Big "KNOW IT ALL" text as clickable button */}
+      <div className="center-content">
+        <span className="home-button" onClick={() => navigate("/")}>
+          {t("know_it_all")}
+        </span>
       </div>
 
-      {/* Translatable site title */}
-      <div className="know-it-all" onClick={() => navigate("/")}>
-        {t("know_it_all")} {/* Translation key for "Know It All" */}
-      </div>
-
-      <div className="login-register">
-        {/* Translatable Login button */}
-        <button className="login-button" onClick={() => navigate("/login")}>
-          {t("login")} {/* Translation key for "Login" */}
-        </button>
-
-        {/* Translatable Register button */}
-        <button className="register-button" onClick={() => navigate("/register")}>
-          {t("register")} {/* Translation key for "Register" */}
-        </button>
-        <button className="random-button" onClick={() => navigate("/random")}>
-          {t("random")} {/* Translation key for "Register" */}
-        </button>
-        <button className="friends-button" onClick={() => navigate("/Leaderboard")}>
-          {t("Leaderboard")} {/* Translation key for "Register" */}
-        </button>
+      {/* Right - Authentication and Navigation Buttons */}
+      <div className="right-buttons">
+        {token && username ? (
+          <>
+            <span className="welcome-message button-style">
+              {t("welcome")}, {username}
+            </span>
+            <button className="random-button button-style" onClick={() => navigate("/random")}>
+              {t("random")}
+            </button>
+            <button className="friends-button button-style" onClick={() => navigate("/Leaderboard")}>
+              {t("Leaderboard")}
+            </button>
+            <button className="logout-button button-style" onClick={handleLogout}>
+              {t("Logout")}
+            </button>
+          </>
+        ) : (
+          <>
+            <button className="login-button button-style" onClick={() => navigate("/login")}>
+              {t("login")}
+            </button>
+            <button className="register-button button-style" onClick={() => navigate("/register")}>
+              {t("register")}
+            </button>
+            <button className="random-button button-style" onClick={() => navigate("/random")}>
+              {t("random")}
+            </button>
+            <button className="friends-button button-style" onClick={() => navigate("/Leaderboard")}>
+              {t("Leaderboard")}
+            </button>
+          </>
+        )}
       </div>
     </header>
   );

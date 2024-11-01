@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";  
+import { useTranslation } from "react-i18next";
+import axios from "axios";
 import "./Login.css";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -8,10 +9,28 @@ import Footer from "./Footer";
 function Login() {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      // Send login request to backend
+      const response = await axios.post("/api/user/login", { username, password });
+      // Save token and username to local storage and navigate to the home page
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("username", username);
+      navigate("/"); // Redirect to home page
+    } catch (error) {
+      // Set an error message if login fails
+      setError(t("invalid_username_or_password"));
+    }
+  };
 
   const handleBackClick = (e) => {
-    e.preventDefault(); // Prevent form submission
-    navigate("/"); // Navigate back to the homepage
+    e.preventDefault();
+    navigate("/");
   };
 
   return (
@@ -19,16 +38,18 @@ function Login() {
       <Header />
       <main className="login-form">
         <h1>{t("login")}</h1>
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="form-group">
             <label htmlFor="username">{t("username")}:</label>
-            <input type="text" id="username" name="username" placeholder={t("enter_username_placeholder")} required />
+            <input type="text" id="username" name="username" value={username} onChange={(e) => setUsername(e.target.value)} placeholder={t("enter_username_placeholder")} required />
           </div>
 
           <div className="form-group">
             <label htmlFor="password">{t("password")}:</label>
-            <input type="password" id="password" name="password" placeholder={t("enter_password_placeholder")} required />
+            <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder={t("enter_password_placeholder")} required />
           </div>
+
+          {error && <p className="error-message">{error}</p>}
 
           <div className="button-group">
             <button type="submit" className="submit-button">
