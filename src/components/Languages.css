@@ -52,7 +52,7 @@
 }
 
 .language-button.active-language {
-  background-color: #EA5058;
+  background-color: green;
   color: white;
 }
 
@@ -74,24 +74,7 @@
   background-color: #0056b3;
 }
 
-/* Specific Language Button Colors */
-.languages-list li:nth-child(1) .language-button {
-  background-color: #EA5058;
-  color: white;
-}
 
-.languages-list li:nth-child(1) .language-button:hover {
-  background-color: #b43f45;
-}
-
-.languages-list li:nth-child(2) .language-button {
-  background-color: #40CE74;
-  color: white;
-}
-
-.languages-list li:nth-child(2) .language-button:hover {
-  background-color: #34a75e;
-}
 
 /* Text Styling */
 h1.languages-page {
