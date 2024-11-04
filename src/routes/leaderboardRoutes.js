@@ -11,11 +11,11 @@ router.post("/start-game", authMiddleware, (req, res) => {
 // Protected route to update leaderboard with new score
 router.post("/update", authMiddleware, async (req, res) => {
   console.log("Request body:", req.body);
-  const { name, score, difficulty } = req.body;
+  const { name, score, gameMode } = req.body;
 
   try {
     // Create new leaderboard entry
-    let leaderboardEntry = new Leaderboard({ name, score, gameMode: difficulty });
+    let leaderboardEntry = new Leaderboard({ name, score, gameMode });
     await leaderboardEntry.save();
     console.log("Leaderboard entry:", leaderboardEntry);
     res.status(201).json({ message: "New score added to leaderboard", updated: true });
