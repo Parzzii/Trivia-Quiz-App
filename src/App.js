@@ -11,7 +11,7 @@ import Register from "./components/Register";
 import Random from "./components/Random";
 import FetchQuestions from "./components/fetchQuestions";
 import Leaderboard from "./components/Leaderboard";
-import AddFriends from "./components/AddFriends";
+// import AddFriends from "./components/AddFriends";
 import Game from "./components/Game"; // Import the Game component
 
 // Protected route component for checking authentication
@@ -49,7 +49,7 @@ function App() {
           <Route path="/question-page" element={<ProtectedRoute element={<QuestionPage />} />} />
           <Route path="/random" element={<ProtectedRoute element={<Random />} />} />
           <Route path="/fetch-questions/:topicId/:difficulty" element={<ProtectedRoute element={<FetchQuestions />} />} />
-          <Route path="/add-friends" element={<ProtectedRoute element={<AddFriends />} />} />
+          {/* <Route path="/add-friends" element={<ProtectedRoute element={<AddFriends />} />} /> */}
 
           {/* Game Route with Score Submission */}
           <Route path="/game" element={<ProtectedRoute element={<Game onScoreSubmit={refreshLeaderboard} />} />} />
