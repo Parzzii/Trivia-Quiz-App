@@ -29,13 +29,13 @@ function Register() {
     try {
       // Make registration request to backend
       const response = await axios.post("/api/user/register", { username, password });
-      setSuccess(t("Registration Successful"));
+      setSuccess(t("registration_successful"));
       setUsername("");
       setPassword("");
       setConfirmPassword("");
       setTimeout(() => navigate("/login"), 2000); // Redirect to login after success
     } catch (error) {
-      setError(error.response?.data?.message || t("Registration Error"));
+      setError(error.response?.data?.message || t("registration_error"));
     }
   };
 
