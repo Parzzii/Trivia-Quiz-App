@@ -4,60 +4,84 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  /* background-color: #bdeff5; */
-  background: #d6f6ff; /* Light background for contrast */
+  background: #d6f6ff; 
   font-family: "Comic Neue", Arial, sans-serif;
 
 
 }
 
-.contact-content {
-  flex: 1;
-  display: flex; /* Use flexbox for centering */
-  flex-direction: column; /* Stack elements vertically */
-  align-items: center; /* Center elements horizontally */
-  justify-content: center; /* Center elements vertically */
-  padding: 40px; /* More padding for breathing room */
-  text-align: center;
-}
+
 
 .back-button-group {
-  margin-top: 20px; /* Space above the button */
+  margin-top: 20px;
 }
 
 .back-button {
-  background-color: #4caf50; /* Green button */
+  background-color: #4caf50; 
   color: white;
-  padding: 12px 24px; /* Increased padding for a better click area */
+  padding: 12px 24px;
   border: none;
   cursor: pointer;
   border-radius: 5px;
   font-size: 18px;
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+  transition: background-color 0.3s ease, transform 0.3s ease; 
 }
 
 .back-button:hover {
-  background-color: #45a049; /* Darker green on hover */
-  transform: translateY(-2px); /* Slight lift effect */
+  background-color: #45a049; 
+  transform: translateY(-2px); 
 }
 
 h1 {
-  font-size: 2.5rem; /* Larger font size for the heading */
-  color: #333; /* Darker text color */
-  margin-bottom: 20px; /* Space below the heading */
+  font-size: 2.5rem; 
+  color: #333; 
+  margin-bottom: 20px;
 }
 
 p {
-  font-size: 1.2rem; /* Larger font size for paragraphs */
-  color: #666; /* Gray text color */
+  font-size: 1.2rem;
+  color: #666; 
   margin: 10px 0;
 }
 
 a {
-  color: #007bff; /* Link color */
-  text-decoration: none; /* Remove underline */
+  color: #0036c9; 
+  text-decoration: none; 
 }
 
 a:hover {
-  text-decoration: underline; /* Underline on hover */
+  text-decoration: underline; 
+}
+
+.contact-content {
+  background-color: #33CCD0; 
+  padding: 0px 100px; 
+  border-radius: 20px;
+  color: #000000; 
+  max-width: 400px; 
+  margin: 100px auto; 
+  text-align: center;
+  flex: 1;
+  padding-top: 0px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); 
+}
+
+.contact-content h1, 
+.contact-content p {
+  position: relative;
+  display: inline-block;
+  border-radius: 8px; 
+  color: #000000; 
+  margin: 10px 0px; 
+  font-size: 30px;
+}
+
+.contact-content h1{
+  font-size: 70px; 
 }

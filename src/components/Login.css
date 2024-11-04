@@ -27,6 +27,7 @@
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   animation: slideIn 0.5s ease;
+  padding-bottom: 40px;
 }
 
 @keyframes slideIn {
@@ -117,6 +118,7 @@
   width: auto !important;
   font-family: "Comic Neue", Arial, sans-serif;
   font-size: 32px !important;
+  margin-bottom: 20px;
 }
 
 /* Mobile devices: 320px to 480px */
