@@ -10,30 +10,15 @@ router.post("/start-game", authMiddleware, (req, res) => {
 
 // Protected route to update leaderboard with new score
 router.post("/update", authMiddleware, async (req, res) => {
-  const { score } = req.body;
-  const userId = req.user.id;
-  const username = req.user.username; // Assuming username is available in req.user from authMiddleware
+  console.log("Request body:", req.body);
+  const { name, score, difficulty } = req.body;
 
   try {
-    // Find or create leaderboard entry for the user
-    let leaderboardEntry = await Leaderboard.findOne({ userId });
-
-    if (leaderboardEntry) {
-      // Only update if the new score is higher
-      if (score > leaderboardEntry.score) {
-        leaderboardEntry.score = score;
-        leaderboardEntry.username = username; // Update username if needed
-        await leaderboardEntry.save();
-        res.status(200).json({ message: "Score updated successfully", updated: true });
-      } else {
-        res.status(200).json({ message: "Score not updated; existing score is higher", updated: false });
-      }
-    } else {
-      // Create new leaderboard entry if it doesn't exist
-      leaderboardEntry = new Leaderboard({ userId, username, score });
-      await leaderboardEntry.save();
-      res.status(201).json({ message: "New score added to leaderboard", updated: true });
-    }
+    // Create new leaderboard entry
+    let leaderboardEntry = new Leaderboard({ name, score, gameMode: difficulty });
+    await leaderboardEntry.save();
+    console.log("Leaderboard entry:", leaderboardEntry);
+    res.status(201).json({ message: "New score added to leaderboard", updated: true });
   } catch (error) {
     console.error("Leaderboard update error:", error);
     res.status(500).json({ message: "Error updating leaderboard" });
