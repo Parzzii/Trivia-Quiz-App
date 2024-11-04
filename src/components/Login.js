@@ -24,7 +24,7 @@ function Login() {
       navigate("/"); // Redirect to home page
     } catch (error) {
       // Set an error message if login fails
-      setError(t("invalid_username_or_password"));
+      setError(t("Invalid Username or Password"));
     }
   };
 
