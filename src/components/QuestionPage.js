@@ -7,7 +7,7 @@ import Footer from "./Footer";
 
 const QuestionPage = () => {
   const { state } = useLocation();
-  const { topicId, difficulty, playerName } = state || {};
+  const { topicId, difficulty, userName } = state || {};
   const navigate = useNavigate();
 
   const [questions, setQuestions] = useState([]);
@@ -141,10 +141,14 @@ const QuestionPage = () => {
   };
 
   const handleEndQuiz = async () => {
-    await fetch("/api/leaderboard", {
+    const token = localStorage.getItem("authToken");
+    const name = localStorage.getItem("username");
+    await fetch("http://localhost:5002/api/leaderboard/update", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: playerName, score, gameMode: difficulty }),
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`, "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ name, score, gameMode: difficulty }),
     });
   };
 
