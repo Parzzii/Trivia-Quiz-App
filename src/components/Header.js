@@ -38,10 +38,10 @@ const Header = () => {
               {t("random")}
             </button>
             <button className="friends-button button-style" onClick={() => navigate("/Leaderboard")}>
-              {t("Leaderboard")}
+              {t("leaderboard")}
             </button>
             <button className="logout-button button-style" onClick={handleLogout}>
-              {t("Logout")}
+              {t("logout")}
             </button>
           </>
         ) : (
@@ -56,7 +56,7 @@ const Header = () => {
               {t("random")}
             </button>
             <button className="friends-button button-style" onClick={() => navigate("/Leaderboard")}>
-              {t("Leaderboard")}
+              {t("leaderboard")}
             </button>
           </>
         )}

@@ -9,11 +9,10 @@
   padding: 20px;
   background-color: #bdeff5; /* Light blue background */
   font-family: "Comic Neue", Arial, sans-serif;
-
 }
 
 .contact-form {
-  background-color: #33CCD0; /* White background for the form */
+  background-color: #33ccd0; /* White background for the form */
   border-radius: 15px;
   padding: 40px;
   width: 90%; /* Responsive width */
@@ -40,7 +39,6 @@
   font-size: 1rem;
   transition: border-color 0.3s ease; /* Smooth transition for border */
   font-family: "Comic Neue", Arial, sans-serif;
-
 }
 
 .input-field:focus,
@@ -96,4 +94,46 @@
 .back-button:hover {
   background-color: #e64a19; /* Darker shade on hover */
   transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .contact-form {
+    padding: 20px;
+  }
+
+  .contact-form h1 {
+    font-size: 40px;
+  }
+
+  .input-field,
+  .message-box {
+    width: 100%;
+  }
+
+  .send-button,
+  .back-button {
+    font-size: 30px;
+    padding: 15px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-form {
+    padding: 10px;
+  }
+
+  .contact-form h1 {
+    font-size: 30px;
+  }
+
+  .note {
+    font-size: 20px;
+  }
+
+  .send-button,
+  .back-button {
+    font-size: 20px;
+    padding: 10px 15px;
+  }
 }

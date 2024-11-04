@@ -7,7 +7,7 @@ body {
 
 .header {
   display: flex;
-  justify-content: flex-end; /* Aligns all content to the right */
+  justify-content: space-between;
   align-items: center;
   padding: 0 20px;
   height: 70px;
@@ -19,34 +19,37 @@ body {
   right: 0;
   z-index: 1000;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  flex-wrap: wrap; /* Enables wrapping to prevent overlap */
 }
 
-/* Center-aligned username or "KNOW IT ALL" */
 .center-content {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  text-align: center; /* Centers text */
+  white-space: nowrap; /* Prevents text from breaking on smaller screens */
 }
 
 .home-button {
-  font-size: 32px; /* Increased font size */
+  font-size: 32px;
   font-weight: bold;
   color: #ffffff;
-  cursor: pointer; /* Makes it look clickable */
+  cursor: pointer;
   background: none;
   border: none;
   font-family: "Comic Neue", Arial, sans-serif;
-  text-transform: uppercase; /* Makes the text all caps */
+  text-transform: uppercase;
+  white-space: nowrap; /* Prevents button text from breaking */
 }
 
-/* Right-aligned buttons */
 .right-buttons {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-left: auto;
+  flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
 }
 
-/* General Button Styling */
 .button-style {
   color: white;
   padding: 8px 16px;
@@ -59,16 +62,95 @@ body {
   font-family: "Comic Neue", Arial, sans-serif;
 }
 
-/* Hover effect */
 .button-style:hover {
   background-color: #666;
 }
 
-/* Specific style for the logout button to make it red */
 .logout-button {
   background-color: #e63946;
 }
 
 .logout-button:hover {
   background-color: #b22d36;
+}
+
+@media (max-width: 1024px) {
+  .header {
+    padding: 0 15px;
+  }
+
+  .home-button {
+    font-size: 28px;
+  }
+
+  .button-style {
+    font-size: 16px;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center; /* Centers content vertically */
+    height: auto;
+    padding: 10px;
+  }
+
+  .center-content {
+    position: static;
+    transform: none;
+    margin: 10px 0;
+    white-space: normal; /* Allows text to wrap if needed */
+  }
+
+  .right-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center; /* Centers buttons below heading */
+  }
+
+  .home-button {
+    font-size: 24px;
+    text-align: center; /* Centers text */
+  }
+
+  .button-style {
+    font-size: 16px;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 10px;
+  }
+
+  .home-button {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .button-style {
+    font-size: 14px;
+    padding: 4px 8px;
+  }
+
+  .right-buttons {
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+  }
+}
+
+@media (max-width: 320px) {
+  .home-button {
+    font-size: 18px;
+  }
+
+  .button-style {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
 }

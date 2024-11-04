@@ -50,3 +50,24 @@ html {
   flex: 1;
   padding-bottom: 60px; /* Ensures footer doesn't overlap content */
 }
+
+/* Responsive styles */
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .footer-button {
+    margin: 10px 0;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-button {
+    padding: 8px 12px;
+    font-size: 16px;
+  }
+}
