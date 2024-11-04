@@ -2,10 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import "./Random.css";
 import Header from "./Header";
 import Footer from "./Footer";
+import { useTranslation } from "react-i18next";  
+
 
 const Random = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+  const { t } = useTranslation(); 
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -118,18 +121,18 @@ const Random = () => {
       <div className="random-container">
         {!gameStarted ? (
           <button className="start-game-btn" onClick={startGame}>
-            Start Game
+            {t("start_game")}
           </button>
         ) : gameOver ? (
           <div>
-            <h2>Game Over!</h2>
-            <p>Your score: {correctAnswers}</p>
+            <h2>{t("game_over")}!</h2>
+            <p>{t("your_score")}: {correctAnswers}</p>
             <button className="random-replay-btn" onClick={handlePlayAgain}>
-              Play Again
+            {t("play_again")}
             </button>
           </div>
         ) : loading ? (
-          <p>Loading questions...</p>
+          <p>{t("loading_questions")}...</p>
         ) : (
           <>
             {questions[currentQuestionIndex] && (

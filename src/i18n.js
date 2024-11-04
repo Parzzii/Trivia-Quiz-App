@@ -1,5 +1,6 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import Leaderboard from './components/Leaderboard';
 
 i18n
   .use(initReactI18next)
@@ -55,6 +56,36 @@ i18n
             no_categories_found: "No categories available",
             loading_categories: "Loading categories",
             search_topics: "Search topics...",
+            rank: "Rank",
+            name: "Name",
+            score: "Score",
+            game_mode: "Game Mode",
+            leaderboard: "Leaderboard",
+            logout: "Logout",
+            start_game: "Start Game",
+            game_over: "Game Over",
+            your_score: "Your Score",
+            play_again: "Play Again",
+            correct_answers: "Correct Answers",
+            loading_questions: "Loading questions",
+            correct: "Correct!",
+            incorrect: "Incorrect! The correct answer is:",
+            timer: "Timer",
+            your_final_score: "Your final score is",
+            play_again: "Play Again",
+            congradulations_all_correct: "Congratulations! You got all the answers correct!",
+            show_answers: "Show Answers",
+            questions_and_correct_answers: "Questions and Correct Answers",
+            replay: "Replay",
+            correct_answer: "Correct Answer",
+            question: "Question",
+            of: "of",
+            use_hint: "Use Hint",
+            left: "left",
+            next_question: "Next Question",
+            hint: "Hint",
+
+
           }
         },
         ru: {
@@ -101,11 +132,38 @@ i18n
             no_categories_found: "Категории недоступны",
             loading_categories: "Загрузка категорий",
             search_topics: "Поиск тем...",
-          }
-        },
+            rank: "Ранг",
+            name: "Имя",
+            score: "Очки",
+            game_mode: "Режим игры",
+            leaderboard: "Таблица лидеров",
+            logout: "Выйти",
+            start_game: "Начать игру",
+            game_over: "Конец игры",
+            your_score: "Ваш счет",
+            play_again: "Играть снова",
+            correct_answers: "Правильные ответы",
+            loading_questions: "Загрузка вопросов",
+            correct: "Правильно!",
+            incorrect: "Неправильно! Правильный ответ:",
+            timer: "Таймер",
+            your_final_score: "Ваш итоговый счет",
+            congradulations_all_correct: "Поздравляем! Вы ответили правильно на все вопросы!",
+            show_answers: "Показать ответы",
+            questions_and_correct_answers: "Вопросы и правильные ответы",
+            replay: "Повторить",
+            correct_answer: "Правильный ответ",
+            question: "Вопрос",
+            of: "из",
+            use_hint: "Использовать подсказку",
+            left: "осталось",
+            next_question: "Следующий вопрос",
+            hint: "Подсказка",
+
+
+        }
       }
     }
-
-  );
+  });
 
 export default i18n;

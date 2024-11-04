@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import "./Leaderboard.css";
+import { useTranslation } from "react-i18next";  
+
 
 const Leaderboard = ({ refresh }) => {
   const [scores, setScores] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation(); 
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -41,10 +44,10 @@ const Leaderboard = ({ refresh }) => {
     <div className="leaderboard-container">
       <Header />
       <div className="leaderboard-card">
-        <h1 className="leaderboard-title">🏆 Leaderboard 🏆</h1>
+        <h1 className="leaderboard-title">🏆 {t("leaderboard")} 🏆</h1>
 
         {/* Loading and Error Messages */}
-        {loading && <p className="loading-message">Loading...</p>}
+        {loading && <p className="loading-message">{t("loading")}...</p>}
         {error && <p className="error-message">{error}</p>}
 
         {!loading && !error && (
@@ -52,10 +55,10 @@ const Leaderboard = ({ refresh }) => {
             <table>
               <thead>
                 <tr>
-                  <th>Rank</th>
-                  <th>Name</th>
-                  <th>Score</th>
-                  <th>Game Mode</th>
+                  <th>{t("rank")}</th>
+                  <th>{t("name")}</th>
+                  <th>{t("score")}</th>
+                  <th>{t("game_mode")}</th>
                 </tr>
               </thead>
               <tbody>

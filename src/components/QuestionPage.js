@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Confetti from "react-confetti";
 import "./QuestionPage.css";
+import { useTranslation } from "react-i18next";  
 import Header from "./Header";
 import Footer from "./Footer";
 
@@ -9,7 +10,7 @@ const QuestionPage = () => {
   const { state } = useLocation();
   const { topicId, difficulty, userName } = state || {};
   const navigate = useNavigate();
-
+  const { t } = useTranslation(); 
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -192,28 +193,28 @@ const QuestionPage = () => {
 
       <div className="question-container">
         {loading ? (
-          <p>Loading questions...</p>
+          <p>{t("loading_questions")}...</p>
         ) : quizEnded ? (
           <div className="score-section">
-            <h2>Your Final Score</h2>
+            <h2>{t("your_final_score")}</h2>
             <p>{score}</p>
-            {allCorrect && <h3>Congratulations! You got all answers right!</h3>}
+            {allCorrect && <h3>{t("congratulations_all_correct")}</h3>}
 
             {!showAnswers && (
               <button onClick={handleShowAnswers} className="show-answers-btn">
-                Show Answers
+                {t("show_answers")}
               </button>
             )}
 
             {showAnswers && (
               <div className="answered-questions">
-                <h3>Questions and Correct Answers:</h3>
+                <h3>{t("questions_and_correct_answers")}s:</h3>
                 <ul>
                   {answeredQuestions.map((item, index) => (
                     <li key={index}>
                       <strong>Q:</strong> <span dangerouslySetInnerHTML={{ __html: item.question }} />
                       <br />
-                      <strong>Correct Answer:</strong> <span dangerouslySetInnerHTML={{ __html: item.correctAnswer }} />
+                      <strong>{t("correct_answer")}:</strong> <span dangerouslySetInnerHTML={{ __html: item.correctAnswer }} />
                     </li>
                   ))}
                 </ul>
@@ -223,10 +224,10 @@ const QuestionPage = () => {
             <div className="end-options">
               <ul>
                 <li>
-                  <button onClick={handleReplay}>Replay</button>
+                  <button onClick={handleReplay}>{t("replay")}</button>
                 </li>
                 <li>
-                  <button onClick={handleBack}>Back</button>
+                  <button onClick={handleBack}>{t("back")}</button>
                 </li>
               </ul>
             </div>
@@ -237,11 +238,11 @@ const QuestionPage = () => {
               <>
                 <div className="question-header">
                   <p className="question-number">
-                    Question {currentQuestionIndex + 1} of {questions.length}
+                  {t("question")} {currentQuestionIndex + 1} {t("of")} {questions.length}
                   </p>
                   {hitChances > 0 && !usedHitChance && (
                     <button className="hit-chance-btn" onClick={useHitChance}>
-                      Use Hint ({hitChances} left)
+                      {t("use_hint")} ({hitChances} {t("left")})
                     </button>
                   )}
                 </div>
@@ -264,7 +265,7 @@ const QuestionPage = () => {
 
                 {showNextQuestion && (
                   <button className="next-question-btn fade-in" onClick={handleNextQuestionClick}>
-                    Next Question
+                    {t("next_question")}
                   </button>
                 )}
               </>
