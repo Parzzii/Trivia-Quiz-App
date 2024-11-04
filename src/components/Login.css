@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap");
 /*login.css*/
-
 
 /*glue for login card*/
 .login-container {
@@ -10,7 +9,7 @@
   justify-content: center;
   min-height: 100vh;
   padding: 20px;
-  background: #d6f6ff; 
+  background: #d6f6ff;
   padding: 40px 20px;
 }
 
@@ -18,10 +17,10 @@
 .login-form {
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
   width: 500px;
-  height: 500px;
+  height: auto;
   background: #33ccd0;
   padding: 20px;
   border-radius: 20px;
@@ -65,7 +64,7 @@
 
 /*form input*/
 .form-group input {
-  width: 380px;
+  width: 100%;
   height: 60px;
   border-radius: 10px;
   background: #fff;
@@ -77,12 +76,11 @@
   color: #636b6a;
   border: 1px solid #ddd;
   transition: border-color 0.3s;
-  text-align: center; 
+  text-align: center;
 }
 
-
 .form-group input:focus {
-  color: #7539A9;
+  color: #7539a9;
   outline: none;
 }
 
@@ -92,12 +90,11 @@
   align-items: center;
   width: 100%;
   margin-top: 20px;
-  
 }
 
 /* Login button */
 .submit-button {
-  width: auto !important; 
+  width: auto !important;
   height: 80px;
   background: #7539a9 !important;
   border: none;
@@ -114,7 +111,7 @@
 
 /*back button*/
 .back-button {
-  background: #7539A9 !important;
+  background: #7539a9 !important;
   width: auto !important;
   font-family: "Comic Neue", Arial, sans-serif;
   font-size: 32px !important;
@@ -123,25 +120,130 @@
 
 /* Mobile devices: 320px to 480px */
 @media (max-width: 480px) {
+  .login-form {
+    width: 100%;
+    padding: 10px;
+  }
 
+  .login-form h1 {
+    font-size: 48px;
+  }
+
+  .form-group input {
+    font-size: 24px;
+    height: 50px;
+  }
+
+  .submit-button {
+    font-size: 32px !important;
+    height: 60px;
+  }
+
+  .back-button {
+    font-size: 24px !important;
+  }
 }
 
 /* Tablets: 481px to 768px */
 @media (min-width: 481px) and (max-width: 768px) {
- 
+  .login-form {
+    width: 80%;
+    padding: 15px;
+  }
+
+  .login-form h1 {
+    font-size: 64px;
+  }
+
+  .form-group input {
+    font-size: 28px;
+    height: 55px;
+  }
+
+  .submit-button {
+    font-size: 36px !important;
+    height: 70px;
+  }
+
+  .back-button {
+    font-size: 28px !important;
+  }
 }
 
 /* Laptops: 769px to 1024px */
 @media (min-width: 769px) and (max-width: 1024px) {
+  .login-form {
+    width: 70%;
+    padding: 20px;
+  }
 
+  .login-form h1 {
+    font-size: 72px;
+  }
+
+  .form-group input {
+    font-size: 30px;
+    height: 58px;
+  }
+
+  .submit-button {
+    font-size: 40px !important;
+    height: 75px;
+  }
+
+  .back-button {
+    font-size: 30px !important;
+  }
 }
 
 /* Desktops: 1025px to 1200px */
 @media (min-width: 1025px) and (max-width: 1200px) {
- 
+  .login-form {
+    width: 60%;
+    padding: 20px;
+  }
+
+  .login-form h1 {
+    font-size: 80px;
+  }
+
+  .form-group input {
+    font-size: 32px;
+    height: 60px;
+  }
+
+  .submit-button {
+    font-size: 44px !important;
+    height: 78px;
+  }
+
+  .back-button {
+    font-size: 32px !important;
+  }
 }
 
 /* Large screens: Greater than 1200px */
 @media (min-width: 1201px) {
- 
+  .login-form {
+    width: 500px;
+    padding: 20px;
+  }
+
+  .login-form h1 {
+    font-size: 90px;
+  }
+
+  .form-group input {
+    font-size: 32px;
+    height: 60px;
+  }
+
+  .submit-button {
+    font-size: 48px !important;
+    height: 80px;
+  }
+
+  .back-button {
+    font-size: 32px !important;
+  }
 }
