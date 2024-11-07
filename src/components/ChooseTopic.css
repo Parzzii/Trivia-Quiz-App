@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Comic Neue", Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: #d6f6ff;
   width: 100vw;
   height: 100vh;
   overflow: hidden; /* Disable scrolling */
@@ -155,13 +155,13 @@ body {
 }
 
 .choose-topic-main::-webkit-scrollbar-thumb {
-  background-color: #ff6f61;
+  background-color: #d6f6ff;
   border-radius: 10px;
   border: 2px solid transparent;
 }
 
 .choose-topic-main::-webkit-scrollbar-thumb:hover {
-  background-color: #ff4500;
+  background-color: #d6f6ff;
 }
 
 /* Media queries for responsiveness */
