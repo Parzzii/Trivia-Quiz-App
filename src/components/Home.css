@@ -9,6 +9,7 @@ body {
   overflow: hidden; /* Disable page scrolling */
   display: flex;
   flex-direction: column;
+  font-family: "Comic Neue", Arial, sans-serif;
 }
 
 /* Fix header to the top */
@@ -25,6 +26,7 @@ body {
   width: 100%;
   height: 80px;
   z-index: 1;
+  font-family: "Comic Neue", Arial, sans-serif;
 }
 
 .logo {
@@ -71,17 +73,19 @@ body {
 /* Title and subtitle styling */
 .home-title {
   font-size: 48px;
-  color: #333;
+  color: #000000;
   text-transform: uppercase;
   letter-spacing: 3px;
   margin-bottom: 20px;
   text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  font-family: "Comic Neue", Arial, sans-serif;
 }
 
 .home-subtitle {
   font-size: 24px;
-  color: #666;
+  color: #000000;
   margin-bottom: 30px;
+  font-family: "Comic Neue", Arial, sans-serif;
 }
 
 /* Button wrapper for glow effect */
