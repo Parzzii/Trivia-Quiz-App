@@ -59,15 +59,15 @@ body {
 
 /* Main content container adjusts to fill space between header and footer */
 .main {
-  flex-grow: 1;
+  flex-grow: 1; /* Fills space between header and footer */
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
   text-align: center;
   margin-top: 80px; /* Offset for header */
   margin-bottom: 60px; /* Offset for footer */
-  overflow-y: auto; /* Allow scrolling within the main content area */
+  overflow-y: auto;
 }
 
 /* Title and subtitle styling */
@@ -111,7 +111,7 @@ body {
 
 /* Play button with multicolor neon effect */
 .play-button {
-  background: linear-gradient(45deg, #ff007f, #7f00ff, #00ffff, #ff007f);
+  background: #7539A9;
   background-size: 400% 400%;
   color: white;
   font-size: 24px;
@@ -120,7 +120,6 @@ body {
   cursor: pointer;
   border-radius: 10px;
   position: relative;
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
   animation: bounce 2s infinite, glowing 3s infinite, neon 5s infinite;
   transition: background-color 0.3s ease, transform 0.3s ease;
   font-family: "Comic Neue", Arial, sans-serif;
@@ -132,15 +131,7 @@ body {
   transform: scale(1.05);
 }
 
-/* Glowing effect */
-@keyframes glowing {
-  0% {
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.5);
-  }
-  100% {
-    box-shadow: 0 0 30px rgba(255, 0, 0, 1), 0 0 60px rgba(255, 0, 0, 1);
-  }
-}
+
 
 /* Bounce effect */
 @keyframes bounce {
