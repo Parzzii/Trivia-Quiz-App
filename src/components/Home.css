@@ -9,7 +9,6 @@ body {
   overflow: hidden; /* Disable page scrolling */
   display: flex;
   flex-direction: column;
-  font-family: "Comic Neue", Arial, sans-serif;
 }
 
 /* Fix header to the top */
@@ -26,19 +25,6 @@ body {
   width: 100%;
   height: 80px;
   z-index: 1;
-  font-family: "Comic Neue", Arial, sans-serif;
-}
-
-.logo {
-  cursor: pointer;
-  font-size: 28px;
-  font-weight: bold;
-  color: white;
-  transition: color 0.3s ease;
-}
-
-.logo:hover {
-  color: #ff6f61;
 }
 
 /* Fix footer to the bottom */
@@ -57,17 +43,20 @@ body {
   z-index: 1;
 }
 
-/* Main content container adjusts to fill space between header and footer */
+/* Main content container centers content */
 .main {
-  flex-grow: 1; /* Fills space between header and footer */
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center vertically */
-  align-items: center; /* Center horizontally */
+  justify-content: center; /* Centers content vertically */
+  align-items: center; /* Centers content horizontally */
   text-align: center;
-  margin-top: 80px; /* Offset for header */
-  margin-bottom: 60px; /* Offset for footer */
-  overflow-y: auto;
+  padding-top: 80px; /* Offset for header height */
+  padding-bottom: 60px; /* Offset for footer height */
+  overflow-y: auto; /* Allows scrolling if needed */
+
+  /* Shift content down by 30% */
+  transform: translateY(30%);
 }
 
 /* Title and subtitle styling */
@@ -78,14 +67,12 @@ body {
   letter-spacing: 3px;
   margin-bottom: 20px;
   text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
-  font-family: "Comic Neue", Arial, sans-serif;
 }
 
 .home-subtitle {
   font-size: 24px;
   color: #000000;
   margin-bottom: 30px;
-  font-family: "Comic Neue", Arial, sans-serif;
 }
 
 /* Button wrapper for glow effect */
@@ -109,9 +96,9 @@ body {
   z-index: -1;
 }
 
-/* Play button with multicolor neon effect */
+/* Play button with multicolor neon glow effect */
 .play-button {
-  background: #7539A9;
+  background: linear-gradient(90deg, #ff6f61, #7539a9, #6af7ff, #ffcb6e);
   background-size: 400% 400%;
   color: white;
   font-size: 24px;
@@ -119,19 +106,41 @@ body {
   border: none;
   cursor: pointer;
   border-radius: 10px;
-  position: relative;
-  animation: bounce 2s infinite, glowing 3s infinite, neon 5s infinite;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  font-family: "Comic Neue", Arial, sans-serif;
+  animation: glowing 3s infinite, colorShift 5s infinite, bounce 2s infinite;
+  box-shadow: 0 0 20px rgba(255, 111, 97, 0.8), 0 0 40px rgba(117, 57, 169, 0.8), 0 0 60px rgba(106, 247, 255, 0.8), 0 0 80px rgba(255, 203, 110, 0.8);
+  transition: transform 0.3s ease;
 }
 
 /* Play button hover effect */
 .play-button:hover {
-  animation: glowing 1s infinite alternate;
   transform: scale(1.05);
 }
 
+/* Glowing effect */
+@keyframes glowing {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 111, 97, 0.6), 0 0 20px rgba(117, 57, 169, 0.6), 0 0 30px rgba(106, 247, 255, 0.6), 0 0 40px rgba(255, 203, 110, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 111, 97, 0.8), 0 0 40px rgba(117, 57, 169, 0.8), 0 0 60px rgba(106, 247, 255, 0.8), 0 0 80px rgba(255, 203, 110, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(255, 111, 97, 0.6), 0 0 20px rgba(117, 57, 169, 0.6), 0 0 30px rgba(106, 247, 255, 0.6), 0 0 40px rgba(255, 203, 110, 0.6);
+  }
+}
 
+/* Multicolor background shift effect */
+@keyframes colorShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
 /* Bounce effect */
 @keyframes bounce {
@@ -148,45 +157,6 @@ body {
   60% {
     transform: translateY(-10px);
   }
-}
-
-/* Neon effect */
-@keyframes neon {
-  0% {
-    filter: brightness(1);
-  }
-  50% {
-    filter: brightness(1.5);
-  }
-  100% {
-    filter: brightness(1);
-  }
-}
-
-/* Revolving effect */
-@keyframes revolve {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Smooth animations for entering content */
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.main {
-  animation: fadeIn 1.5s ease;
 }
 
 /* Scrollbar customization for the main content */
@@ -213,25 +183,17 @@ body {
   .home-title {
     font-size: 36px;
   }
-
   .home-subtitle {
     font-size: 18px;
   }
-
   .play-button {
     font-size: 20px;
     padding: 10px 30px;
   }
-
   .home-header,
   .home-footer {
     padding: 10px;
     height: 60px;
-  }
-
-  .main {
-    margin-top: 60px; /* Adjust offset for smaller header */
-    margin-bottom: 50px; /* Adjust offset for smaller footer */
   }
 }
 
@@ -239,24 +201,16 @@ body {
   .home-title {
     font-size: 28px;
   }
-
   .home-subtitle {
     font-size: 16px;
   }
-
   .play-button {
     font-size: 18px;
     padding: 8px 20px;
   }
-
   .home-header,
   .home-footer {
     padding: 5px;
     height: 50px;
-  }
-
-  .main {
-    margin-top: 50px; /* Adjust offset for smaller header */
-    margin-bottom: 40px; /* Adjust offset for smaller footer */
   }
 }
