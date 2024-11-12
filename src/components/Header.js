@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./Header.css";
+import icon from "../assets/icon.png";
 
 const Header = () => {
   const { t } = useTranslation();
@@ -20,7 +21,16 @@ const Header = () => {
 
   return (
     <header className="header">
-      {/* Center - Big "KNOW IT ALL" text as clickable button */}
+      {/* Left - Icon/Logo */}
+      <div className="left-content" onClick={() => navigate("/")}>
+        <img
+          src={icon}
+          alt="Logo"
+          className="header-logo"
+        />
+      </div>
+
+      {/* Center - "KNOW IT ALL" text as clickable button */}
       <div className="center-content">
         <span className="home-button" onClick={() => navigate("/")}>
           {t("know_it_all")}
