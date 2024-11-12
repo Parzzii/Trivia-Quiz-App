@@ -1,6 +1,5 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import Leaderboard from './components/Leaderboard';
 
 i18n
   .use(initReactI18next)
@@ -48,6 +47,10 @@ i18n
             confirm_password_placeholder: "Confirm your password",
             enter_username_placeholder: "Enter your username",
             enter_password_placeholder: "Enter your password",
+            passwords_do_not_match: "Passwords do not match",
+            registration_successful: "Registration successful! ",
+            registration_error: "Registration error. Please try again.",
+            invalid_username_or_password: "Invalid username or password. Please try again.",
             choose_a_topic: "Choose a Topic",
             select_difficulty: "Select Difficulty",
             easy: "Easy",
@@ -65,7 +68,6 @@ i18n
             start_game: "Start Game",
             game_over: "Game Over",
             your_score: "Your Score",
-            play_again: "Play Again",
             correct_answers: "Correct Answers",
             loading_questions: "Loading questions",
             correct: "Correct!",
@@ -124,6 +126,10 @@ i18n
             confirm_password_placeholder: "Подтвердите пароль",
             enter_username_placeholder: "Введите имя пользователя",
             enter_password_placeholder: "Введите пароль",
+            passwords_do_not_match: "Пароли не совпадают",
+            registration_successful: "Регистрация прошла успешно! ",
+            registration_error: "Ошибка регистрации. Пожалуйста, попробуйте еще раз.",
+            invalid_username_or_password: "Неверное имя пользователя или пароль. Пожалуйста, попробуйте еще раз.",
             choose_a_topic: "Выберите тему",
             select_difficulty: "Выберите сложность",
             easy: "Легко",

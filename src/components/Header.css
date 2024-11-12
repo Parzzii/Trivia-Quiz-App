@@ -1,3 +1,4 @@
+/* General body and header styling */
 body {
   margin-top: 70px;
   font-family: "Arial", sans-serif;
@@ -22,16 +23,30 @@ body {
   flex-wrap: wrap; /* Enables wrapping to prevent overlap */
 }
 
+/* Left - Icon/Logo styling */
+.left-content {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header-logo {
+  width: 40px; /* Adjust size as needed */
+  height: 40px;
+  margin-right: 10px; /* Space between icon and other content */
+}
+
+/* Center - Big text */
 .center-content {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  text-align: center; /* Centers text */
-  white-space: nowrap; /* Prevents text from breaking on smaller screens */
+  text-align: center;
+  white-space: nowrap;
 }
 
 .home-button {
-  font-size: 32px;
+  font-size: 36px; /* Increased font size */
   font-weight: bold;
   color: #ffffff;
   cursor: pointer;
@@ -39,15 +54,16 @@ body {
   border: none;
   font-family: "Comic Neue", Arial, sans-serif;
   text-transform: uppercase;
-  white-space: nowrap; /* Prevents button text from breaking */
+  white-space: nowrap;
 }
 
+/* Right - Buttons */
 .right-buttons {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-left: auto;
-  flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
+  flex-wrap: wrap;
 }
 
 .button-style {
@@ -74,13 +90,14 @@ body {
   background-color: #b22d36;
 }
 
+/* Media Queries */
 @media (max-width: 1024px) {
   .header {
     padding: 0 15px;
   }
 
   .home-button {
-    font-size: 28px;
+    font-size: 32px;
   }
 
   .button-style {
@@ -92,7 +109,7 @@ body {
 @media (max-width: 768px) {
   .header {
     flex-direction: column;
-    align-items: center; /* Centers content vertically */
+    align-items: center;
     height: auto;
     padding: 10px;
   }
@@ -101,19 +118,19 @@ body {
     position: static;
     transform: none;
     margin: 10px 0;
-    white-space: normal; /* Allows text to wrap if needed */
+    white-space: normal;
   }
 
   .right-buttons {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 5px;
-    justify-content: center; /* Centers buttons below heading */
+    justify-content: center;
   }
 
   .home-button {
-    font-size: 24px;
-    text-align: center; /* Centers text */
+    font-size: 28px;
+    text-align: center;
   }
 
   .button-style {
@@ -128,7 +145,7 @@ body {
   }
 
   .home-button {
-    font-size: 20px;
+    font-size: 24px;
     text-align: center;
   }
 
@@ -146,7 +163,7 @@ body {
 
 @media (max-width: 320px) {
   .home-button {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .button-style {
